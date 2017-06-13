@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AddOnRegData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SlientInstallation="No" SlientUpgrade="No" Partnernmsp="C:\Users\Programador\Desktop\Proyecto Mindugar\Gestion de Proyectos\Proyectos\bin" SchemaVersion="" Type="" MultipleVersion="false" OnDemand="" OnPremise="" ExtName="C:\Users\Programador\Desktop\Proyecto Mindugar\Gestion de Proyectos\Proyectos\bin" ExtVersion="1.1.5" Contdata="C:\Users\Programador\Desktop\Proyecto Mindugar\Gestion de Proyectos\Proyectos\bin" Partner="C:\Users\Programador\Desktop\Proyecto Mindugar\Gestion de Proyectos\Proyectos\bin" DBType="MSSQL" ClientType="A">
+  <Validity>
+    <SBOCompatibility>
+      <Version From="" To="" />
+    </SBOCompatibility>
+  </Validity>
+  <Configuration>
+    <Repository />
+    <Deployment>
+      <Properties />
+    </Deployment>
+    <Assignment>
+      <Properties />
+    </Assignment>
+  </Configuration>
+  <Addons>
+    <Addon Name="C:\Users\Programador\Desktop\Proyecto Mindugar\Gestion de Proyectos\Proyectos\bin" Group="" ForceFlag="" Visible="" AutoAssign="" SelfUpgrd="">
+      <x86 AddonExe="Proyectos.exe" AddonSig="9091D748B804AA9FA7AE0C6C0FCEC543" ExeDir="X86Client">
+        <Installation>
+          <Files>
+            <File FileName="X86Client\Proyectos.b1s">
+              <Actions />
+            </File>
+            <File FileName="X86Client\Proyectos.exe">
+              <Actions />
+            </File>
+            <File FileName="X86Client\SAPBusinessOneSDK.dll">
+              <Actions />
+            </File>
+            <File FileName="X86Client\SAPBusinessOneSDK.dll">
+              <Actions>
+                <Register32bit />
+              </Actions>
+            </File>
+          </Files>
+        </Installation>
+        <Uninstallation>
+          <Files>
+            <File FileName="X86Client\Proyectos.b1s">
+              <Actions />
+            </File>
+            <File FileName="X86Client\Proyectos.exe">
+              <Actions />
+            </File>
+            <File FileName="X86Client\SAPBusinessOneSDK.dll">
+              <Actions />
+            </File>
+            <File FileName="X86Client\SAPBusinessOneSDK.dll">
+              <Actions>
+                <Unregister32bit />
+              </Actions>
+            </File>
+          </Files>
+        </Uninstallation>
+      </x86>
+      <x64 AddonExe="Proyectos.exe" AddonSig="873630C66CFDF9EA153E42EC8209F3BC" ExeDir="X64Client">
+        <Installation>
+          <Files>
+            <File FileName="X64Client\Proyectos.b1s">
+              <Actions />
+            </File>
+            <File FileName="X64Client\Proyectos.exe">
+              <Actions />
+            </File>
+            <File FileName="X64Client\SAPBusinessOneSDK.dll">
+              <Actions />
+            </File>
+            <File FileName="X64Client\SAPBusinessOneSDK.dll">
+              <Actions>
+                <Register64bit />
+              </Actions>
+            </File>
+          </Files>
+        </Installation>
+        <Uninstallation>
+          <Files>
+            <File FileName="X64Client\Proyectos.b1s">
+              <Actions />
+            </File>
+            <File FileName="X64Client\Proyectos.exe">
+              <Actions />
+            </File>
+            <File FileName="X64Client\SAPBusinessOneSDK.dll">
+              <Actions />
+            </File>
+            <File FileName="X64Client\SAPBusinessOneSDK.dll">
+              <Actions>
+                <Unregister64bit />
+              </Actions>
+            </File>
+          </Files>
+        </Uninstallation>
+      </x64>
+    </Addon>
+  </Addons>
+  <XApps>
+    <XApp Name="" Path="" FileName="" />
+  </XApps>
+  <UDQs>
+    <UDQ udqname="">
+      <Hana FileName="" />
+    </UDQ>
+  </UDQs>
+</AddOnRegData>
