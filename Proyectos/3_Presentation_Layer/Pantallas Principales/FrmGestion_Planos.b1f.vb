@@ -168,7 +168,7 @@ Namespace SBOAddonProject1
             'oedit.Item.Click(SAPbouiCOM.BoCellClickType.ct_Double)
             'Me.EditText4.String = NOpenDialog.OpenFileDialog()
             If EditText0.Value.Trim.Length > 0 Then
-                oFunciones.Abre_Dialogo_y_Asigna_Path(Me.EditText4)
+                oFunciones.Abre_Dialogo_y_Asigna_Path3(Me.EditText4, DialogType.OPEN)
             Else
                 Application.SBO_Application.StatusBar.SetText("Debe Seleccionar un Proyecto", SAPbouiCOM.BoMessageTime.bmt_Short, SAPbouiCOM.BoStatusBarMessageType.smt_Warning)
             End If

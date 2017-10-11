@@ -369,7 +369,7 @@ Namespace SBOAddonProject1
 
                 Try  'Carga los UDF en la ventana lateral de campos, si no esta abierta, se abre por menu
 
-                    'Capturamos la ventana lateral que tiene un numero de FormID inmedito al Form Padre (F_258 -> F_259)
+                    'Capturamos la ventana lateral que tiene un numero de FormID inmediato al Form Padre (F_258 -> F_259)
                     Try
                         Dim UDFFormID = oForm.UDFFormUID
                         Dim FormIdProx = (Convert.ToInt32(FormUID.Replace(Left(FormUID, 2), "")) + 1).ToString()
@@ -385,11 +385,19 @@ Namespace SBOAddonProject1
                     End Try
 
                     oForm.Freeze(True)
+
                     Dim CatAct As String = ""
                     oComboBox = oForm.Items.Item("9").Specific
                     CatAct = oComboBox.Selected.Description.Trim()
                     'oComboBox.Item.Description = "Tod.categorías"
-                    oComboBox.Select("Tod.categorías", SAPbouiCOM.BoSearchKey.psk_ByDescription)
+                    Try
+                        oComboBox.Select("General", SAPbouiCOM.BoSearchKey.psk_ByDescription)
+                    Catch ex As Exception
+                        Try
+                            oComboBox.Select(oComboBox.ValidValues.Count - 1, SAPbouiCOM.BoSearchKey.psk_Index)
+                        Catch e As Exception
+                        End Try
+                    End Try
 
                     oComboBox = oForm.Items.Item("U_MIN_Multa").Specific
                     oComboBox.Item.Description = oDataTable.GetValue("Multa", 0)
@@ -398,21 +406,21 @@ Namespace SBOAddonProject1
                     SystemForm2.CambiarEnableFechasProyectos(oForm, True)
 
                     oedit2 = oForm.Items.Item("U_MIN_FechaVenta").Specific
-                    oedit2.String = oDataTable.GetValue("Fecha_Venta", 0)   'oRsSUers.Fields.Item("Fecha_Venta").Value
+                    oedit2.String = oDataTable.GetValue("Fecha_Venta", 0)
                     oedit2 = oForm.Items.Item("U_MIN_FinDesarr").Specific
-                    oedit2.String = oDataTable.GetValue("Fecha_Fin_Desarr", 0)   'oRsSUers.Fields.Item("Fecha_Fin_Desarr").Value
+                    oedit2.String = oDataTable.GetValue("Fecha_Fin_Desarr", 0)
                     oedit2 = oForm.Items.Item("U_MIN_FinProduccion").Specific
-                    oedit2.String = oDataTable.GetValue("Fecha_Fin_Produc", 0)  'oRsSUers.Fields.Item("Fecha_Fin_Produc").Value
+                    oedit2.String = oDataTable.GetValue("Fecha_Fin_Produc", 0)
                     oedit2 = oForm.Items.Item("U_MIN_IniDespacho").Specific
-                    oedit2.String = oDataTable.GetValue("Fecha_Ini_Despa", 0)  'oRsSUers.Fields.Item("Fecha_Ini_Despa").Value
+                    oedit2.String = oDataTable.GetValue("Fecha_Ini_Despa", 0)
                     oedit2 = oForm.Items.Item("U_MIN_IniMontaje").Specific
-                    oedit2.String = oDataTable.GetValue("Fecha_Ini_Monta", 0)  'oRsSUers.Fields.Item("Fecha_Ini_Monta").Value
+                    oedit2.String = oDataTable.GetValue("Fecha_Ini_Monta", 0)
                     oedit2 = oForm.Items.Item("U_MIN_FinMontaje").Specific
-                    oedit2.String = oDataTable.GetValue("Fecha_Fin_Monta", 0)  'oRsSUers.Fields.Item("Fecha_Fin_Monta").Value
+                    oedit2.String = oDataTable.GetValue("Fecha_Fin_Monta", 0)
                     oedit2 = oForm.Items.Item("U_MIN_FechaMulta").Specific
-                    oedit2.String = oDataTable.GetValue("Fecha_Ini_Multa", 0)  'oRsSUers.Fields.Item("Fecha_Ini_Multa").Value
+                    oedit2.String = oDataTable.GetValue("Fecha_Ini_Multa", 0)
                     oedit2 = oForm.Items.Item("U_MIN_ObsMulta").Specific
-                    oedit2.String = oDataTable.GetValue("Comentario_Multa", 0)  'oRsSUers.Fields.Item("Comentario_Multa").Value
+                    oedit2.String = oDataTable.GetValue("Comentario_Multa", 0)
 
                     SystemForm2.CambiarEnableFechasProyectos(oForm, False)
 

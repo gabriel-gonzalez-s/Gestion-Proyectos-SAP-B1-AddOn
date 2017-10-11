@@ -701,6 +701,15 @@ Grabar:
 
                 Me.Grd_PlanifMont.Columns.Item("Modif").Visible = False
 
+                Me.Grd_PlanifMont.Columns.Item("Fec.Ini.Desp").Editable = False
+                Me.Grd_PlanifMont.Columns.Item("Fec.Ini.Desp").RightJustified = True
+
+                Me.Grd_PlanifMont.Columns.Item("Primer Desp.").Editable = False
+                Me.Grd_PlanifMont.Columns.Item("Primer Desp.").RightJustified = True
+
+                Me.Grd_PlanifMont.Columns.Item("Ultimo Desp.").Editable = False
+                Me.Grd_PlanifMont.Columns.Item("Ultimo Desp.").RightJustified = True
+
             Catch ex As Exception
                 Application.SBO_Application.StatusBar.SetText(ex.Message)
             Finally
@@ -738,6 +747,10 @@ Grabar:
                 Me.Grd_PlanifMont.Columns.Item("% Desp").BackColor = RGB(224, 255, 255) 'Cian claro
                 Me.Grd_PlanifMont.Columns.Item("% PCIs").BackColor = RGB(224, 255, 255) 'Cian claro
                 Me.Grd_PlanifMont.Columns.Item("Fec.Recep.").BackColor = RGB(224, 255, 255) 'Cian claro
+                Me.Grd_PlanifMont.Columns.Item("Fec.Ini.Desp").BackColor = RGB(224, 255, 255) 'Cian claro
+                Me.Grd_PlanifMont.Columns.Item("Primer Desp.").BackColor = RGB(224, 255, 255) 'Cian claro
+                Me.Grd_PlanifMont.Columns.Item("Ultimo Desp.").BackColor = RGB(224, 255, 255) 'Cian claro
+
 
                 Dim nRow As Integer = 0
                 For Row = 0 To Grd_PlanifMont.Rows.Count - 1

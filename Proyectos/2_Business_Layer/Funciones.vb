@@ -83,6 +83,7 @@ Namespace SBOAddonProject1
 
             Try
                 System.Windows.Forms.Application.Exit()
+                System.Windows.Forms.Application.ExitThread()
             Catch ex As Exception
 
             End Try
@@ -1591,6 +1592,20 @@ Namespace SBOAddonProject1
             EditText.Value = sRuta.Trim()
 
         End Sub
+
+        Public Sub Abre_Dialogo_y_Asigna_Path3(EditText As SAPbouiCOM.EditText, TipoDialogo As DialogType)
+            ' Abre una ventana de File Dialog y toma la ruta completa del archivo seleccionado
+
+            Dim dialog As New NSelectFileDialog("", "", "All files (*.*)|*.*", TipoDialogo)
+            dialog.Open()
+
+            If Not String.IsNullOrEmpty(dialog.SelectedFile) Then
+                EditText.Value = dialog.SelectedFile.Trim()
+            End If
+
+        End Sub
+
+
         '------------------------------------------------------------------------------------------------------------------------------------------------------
 
         Public Sub LinkedObjectForm(ByVal FormUniqueID As String, ByVal ActivateMenuItem As String, ByVal FindItemUID As String, ByVal FindItemUIDValue As String)

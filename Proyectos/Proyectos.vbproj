@@ -169,6 +169,7 @@
     <Compile Include="2_Business_Layer\NDocumProyecto.vb" />
     <Compile Include="2_Business_Layer\NProjectSAP.vb" />
     <Compile Include="2_Business_Layer\NProyectos.vb" />
+    <Compile Include="2_Business_Layer\NSelectFileDialog.vb" />
     <Compile Include="2_Business_Layer\NSimulacionMontaje.vb" />
     <Compile Include="3_Presentation_Layer\Pantallas Modales\FrmBuscaProyecto.b1f.vb">
       <DependentUpon>FrmBuscaProyecto.b1f</DependentUpon>
@@ -335,7 +336,9 @@
     <None Include="3_Presentation_Layer\Pantallas Principales\FrmEstado_Global.b1f">
       <FormCategory>UserForm</FormCategory>
     </None>
-    <None Include="3_Presentation_Layer\Pantallas Secundarias\FrmGestionFecha 3.b1f" />
+    <None Include="3_Presentation_Layer\Pantallas Secundarias\FrmGestionFecha 3.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Interop.Access.Dao">

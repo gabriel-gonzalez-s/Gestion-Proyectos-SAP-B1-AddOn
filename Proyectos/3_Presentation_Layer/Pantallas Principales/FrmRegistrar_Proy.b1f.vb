@@ -329,7 +329,7 @@ Namespace SBOAddonProject1
 
         Private Sub Button4_ClickAfter(sboObject As System.Object, pVal As SAPbouiCOM.SBOItemEventArg) Handles Button4.ClickAfter
 
-            oFunciones.Abre_Dialogo_y_Asigna_Path(Me.EditText27)
+            oFunciones.Abre_Dialogo_y_Asigna_Path3(Me.EditText27, DialogType.OPEN)
 
         End Sub
 

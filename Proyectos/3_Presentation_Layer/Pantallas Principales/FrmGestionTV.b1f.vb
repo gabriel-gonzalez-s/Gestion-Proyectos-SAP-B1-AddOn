@@ -38,6 +38,7 @@ Namespace SBOAddonProject1
             Me.Button2 = CType(Me.GetItem("Item_17").Specific, SAPbouiCOM.Button)
             Me.Button3 = CType(Me.GetItem("Item_18").Specific, SAPbouiCOM.Button)
             Me.StaticText6 = CType(Me.GetItem("Item_19").Specific, SAPbouiCOM.StaticText)
+            Me.Button4 = CType(Me.GetItem("Item_20").Specific, SAPbouiCOM.Button)
             Me.OnCustomInitialize()
 
         End Sub
@@ -110,21 +111,21 @@ Namespace SBOAddonProject1
 
                             'Insertar Registro en la Tabla de AFPs
 
-                            sPSql = " INSERT INTO [" + sBDComercial + "].[dbo].[@ZTVMONT] " & _
-                                    " ([Code] " & _
-                                    " ,[Name] " & _
-                                    " ,[U_Texto] " & _
-                                    " ,[U_FecInicio] " & _
-                                    " ,[U_HoraInicio] " & _
-                                    " ,[U_FecFinal] " & _
-                                    " ,[U_HoraFinal]) " & _
-                                    "                 VALUES " & _
-                                    " (" + nProx.ToString + " " & _
-                                    " ," + nProx.ToString + " " & _
-                                    " ,'" + EditText0.Value.Trim() + "' " & _
-                                    " ,convert(date,'" + FecDesde.Trim() + "',103) " & _
-                                    " ," + oFunciones.Hora_a_HoraSAPBD(EditText3.Value.Trim()) + " " & _
-                                    " ,convert(date,'" + FecHasta.Trim() + "',103) " & _
+                            sPSql = " INSERT INTO [" + sBDComercial + "].[dbo].[@ZTVMONT] " &
+                                    " ([Code] " &
+                                    " ,[Name] " &
+                                    " ,[U_Texto] " &
+                                    " ,[U_FecInicio] " &
+                                    " ,[U_HoraInicio] " &
+                                    " ,[U_FecFinal] " &
+                                    " ,[U_HoraFinal]) " &
+                                    "                 VALUES " &
+                                    " (" + nProx.ToString + " " &
+                                    " ," + nProx.ToString + " " &
+                                    " ,'" + EditText0.Value.Trim() + "' " &
+                                    " ,convert(date,'" + FecDesde.Trim() + "',103) " &
+                                    " ," + oFunciones.Hora_a_HoraSAPBD(EditText3.Value.Trim()) + " " &
+                                    " ,convert(date,'" + FecHasta.Trim() + "',103) " &
                                     " ," + oFunciones.Hora_a_HoraSAPBD(EditText4.Value.Trim()) + ")  "
 
                             Try
@@ -152,12 +153,12 @@ Namespace SBOAddonProject1
                             Dim FecDesde As String = Me.EditText1.String.Trim() + " " + EditText3.Value.Trim()
                             Dim FecHasta As String = Me.EditText2.String.Trim() + " " + EditText4.Value.Trim()
 
-                            sPSql = " UPDATE [" + sBDComercial + "].[dbo].[@ZTVMONT] " & _
-                                    " SET [U_Texto] = '" + EditText0.Value.Trim() + "'" & _
-                                    "     ,[U_FecInicio] = convert(date,'" + FecDesde.Trim() + "',103) " & _
-                                    "     ,[U_HoraInicio] = " + oFunciones.Hora_a_HoraSAPBD(EditText3.Value.Trim()) + " " & _
-                                    "     ,[U_FecFinal] = convert(date,'" + FecHasta.Trim() + "',103) " & _
-                                    "     ,[U_HoraFinal] = " + oFunciones.Hora_a_HoraSAPBD(EditText4.Value.Trim()) + " " & _
+                            sPSql = " UPDATE [" + sBDComercial + "].[dbo].[@ZTVMONT] " &
+                                    " SET [U_Texto] = '" + EditText0.Value.Trim() + "'" &
+                                    "     ,[U_FecInicio] = convert(date,'" + FecDesde.Trim() + "',103) " &
+                                    "     ,[U_HoraInicio] = " + oFunciones.Hora_a_HoraSAPBD(EditText3.Value.Trim()) + " " &
+                                    "     ,[U_FecFinal] = convert(date,'" + FecHasta.Trim() + "',103) " &
+                                    "     ,[U_HoraFinal] = " + oFunciones.Hora_a_HoraSAPBD(EditText4.Value.Trim()) + " " &
                                     " WHERE Code  = " + EditText5.Value.Trim()
 
                             Try
@@ -367,8 +368,8 @@ Namespace SBOAddonProject1
 
         Private Sub Cargar_Grid_Mensajes_TV()
 
-            sPSql = " SELECT Code as Num,U_Texto as Mensaje, U_FecInicio as 'Fecha Inicio'," & _
-                    " CAST(U_HoraInicio as nvarchar) as 'Hora Inicio',U_FecFinal as 'Fecha Final',CAST(U_HoraFinal as nvarchar) as 'Hora Final' " & _
+            sPSql = " SELECT Code as Num,U_Texto as Mensaje, U_FecInicio as 'Fecha Inicio'," &
+                    " CAST(U_HoraInicio as nvarchar) as 'Hora Inicio',U_FecFinal as 'Fecha Final',CAST(U_HoraFinal as nvarchar) as 'Hora Final' " &
                     " FROM [" + sBDComercial + "].[DBO].[@ZTVMONT] ORDER BY CAST(Code as INT)"
 
             Try
@@ -445,7 +446,7 @@ Namespace SBOAddonProject1
 
         Private Sub Eliminar_MensajeBD(Codigo As Integer)
 
-            sPSql = " DELETE FROM [" + sBDComercial + "].[DBO].[@ZTVMONT] " & _
+            sPSql = " DELETE FROM [" + sBDComercial + "].[DBO].[@ZTVMONT] " &
                     " WHERE Code = " + Codigo.ToString
 
             Try
@@ -499,6 +500,13 @@ Namespace SBOAddonProject1
             'If EditText0.Value.Trim.Length() >= MaxMens Then
             '    Application.SBO_Application.SendKeys("{BACKSPACE}")
             'End If
+
+        End Sub
+
+        Private WithEvents Button4 As SAPbouiCOM.Button
+
+        Private Sub Button4_ClickAfter(sboObject As Object, pVal As SAPbouiCOM.SBOItemEventArg)
+            Throw New System.NotImplementedException()
 
         End Sub
     End Class

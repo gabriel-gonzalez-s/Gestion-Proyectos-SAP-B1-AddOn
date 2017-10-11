@@ -294,18 +294,6 @@ Namespace SBOAddonProject1
 
             End If
 
-            'If pVal.MenuUID = "1288" And pVal.BeforeAction = False Then
-
-            '    oForm = Application.SBO_Application.Forms.ActiveForm
-
-            '    If oForm.TypeEx = "SBOAddonProject1.FrmRegistrar_Proy" Then
-
-            '        Application.SBO_Application.MessageBox("SIRVE!")
-
-            '    End If
-
-            'End If
-
 
             'BOTON DERECHO (BORRAR REGISTRO) -------------------------------------------------------------------------------------------------------------------
 
@@ -350,26 +338,6 @@ Namespace SBOAddonProject1
         '-------------------------------------------------------------------------------------------------------------------------------------------------------------
         Private Sub SBO_Application_ItemEvent(ByVal FormUID As String, ByRef pVal As SAPbouiCOM.ItemEvent, ByRef BubbleEvent As Boolean)
 
-            'If pVal.FormTypeEx = "SBOAddonProject1.FrmRegistrar_Proy" And pVal.EventType = SAPbouiCOM.BoEventTypes.et_FORM_LOAD And pVal.BeforeAction = False Then
-
-            '    oForm = Application.SBO_Application.Forms.Item(pVal.FormUID)
-
-            '    Try
-
-            '        'oForm.DataBrowser.BrowseBy = "OSLP"
-            '        oForm.EnableMenu(1288, True)
-            '        oForm.EnableMenu(1289, True)
-            '        oForm.EnableMenu(1290, True)
-            '        oForm.EnableMenu(1291, True)
-
-            '    Catch ex As Exception
-
-            '    End Try
-
-
-
-
-            'End If
             '------------------------------------------------------------------------------------------------------------------------------------------------
             '  ESTOS EVENTO MANEJA LA CONDICION MODAL DE LAS PANTALLAS DONDE ReportType = "Modal"
             '------------------------------------------------------------------------------------------------------------------------------------------------
@@ -400,7 +368,6 @@ Namespace SBOAddonProject1
                 IDPantallaModal = ""
             End If
             '------------------------------------------------------------------------------------------------------------------------------------------------
-
 
             If pVal.FormTypeEx = "SBOAddonProject1.Form2" Then
                 Form2.SBO_Application_ItemEvent(FormUID, pVal, BubbleEvent)
@@ -700,28 +667,6 @@ Namespace SBOAddonProject1
 
             End If
 
-            'If pVal.FormTypeEx = "139" And pVal.EventType = SAPbouiCOM.BoEventTypes.et_FORM_CLOSE And
-            '   pVal.BeforeAction Then
-
-            '    Try
-            '        oForm = Application.SBO_Application.Forms.Item(pVal.FormUID)
-            '        oComboBox = oForm.Items.Item("81").Specific
-            '        If oComboBox.Selected.Description = "Abiertos" Then
-            '            oedit = oForm.Items.Item("29").Specific
-            '            oedit.Item.Enabled = True
-            '        End If
-            '    Catch ex As Exception
-
-            '    End Try
-
-
-            'End If
-
-
-            'If pVal.FormTypeEx = "139" And pVal.EventType = SAPbouiCOM.BoEventTypes.et_CLICK Then
-            '    Dim a = 10
-            'End If
-
             '---------------------------------------------------------------------------------------------------------------------------------------------------------------------
             '  ESTE EVENTO CARGA LOS CAMPOS AL SELECCIONAR UN PROYECTO Y ESTAR EN MODO ADD Y TODOS LOS CAMPOS EMPTY (USER DATA SOURCE UDS_CFLPRO y ZINFOP) (PEDIDO DE CLIENTES)
             '---------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -750,66 +695,6 @@ Namespace SBOAddonProject1
 
 
             End If
-
-
-            ''CARGAR CAMPO AL COLOCAR PROYECTO MANUALMENTE Y SALIR DEL CAMPO
-            'If pVal.FormTypeEx = "139" And pVal.ItemUID = "157" And pVal.EventType = SAPbouiCOM.BoEventTypes.et_LOST_FOCUS And
-            '   pVal.BeforeAction = False And pVal.FormMode = SAPbouiCOM.BoFormMode.fm_ADD_MODE Then
-
-            '    oForm = Application.SBO_Application.Forms.Item(pVal.FormUID)
-            '    oedit = oForm.Items.Item("157").Specific
-            '    Dim sCad As String = oedit.Value
-
-
-            '    Dim oUDS As SAPbouiCOM.UserDataSource = oForm.DataSources.UserDataSources.Item("UDS_CFLPRO") ' Este dato se Carga en el evento "If pVal.FormTypeEx = "SBOAddonProject1.Form11" And pVal.EventType = SAPbouiCOM.BoEventTypes.et_CHOOSE_FROM_LIST And pVal.BeforeAction = False"
-            '    Dim sCodiP As String = oUDS.ValueEx
-
-            '    oedit = oForm.Items.Item("edCodPro").Specific
-
-            '    If oedit.Value.Trim <> sCodiP And sCad.Trim().Length > 0 And sCad <> sValorInicialCampo Then
-
-            '        Cargar_Datos_Proyecto(oForm, sCodiP, pVal.FormUID, "")
-            '        Cargar_Datos_Adicionales_Proyecto(oForm, sCodiP, pVal.FormUID)
-
-            '    End If
-
-            '    oForm = Application.SBO_Application.Forms.Item(pVal.FormUID)
-            '    oedit = oForm.Items.Item("157").Specific
-            '    oedit.Value = sCad
-
-            'End If
-
-
-            ''---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            ''  ESTE EVENTO SUMA LOS KILOS DEL DETALLE EN EL PEDIDO CLIENTES Y EL RESULTADO LO COLOCA EN EL edKilosTot
-            ''---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            'If pVal.FormTypeEx = "139" And pVal.ItemUID = "38" And pVal.EventType = SAPbouiCOM.BoEventTypes.And Then
-            '   pVal.BeforeAction = False And pVal.FormMode = SAPbouiCOM.BoFormMode.fm_ADD_MODE Then
-
-            '    oForm = Application.SBO_Application.Forms.Item(pVal.FormUID)
-            '    oedit = oForm.Items.Item("157").Specific
-            '    Dim sCad As String = oedit.Value
-
-
-            '    Dim oUDS As SAPbouiCOM.UserDataSource = oForm.DataSources.UserDataSources.Item("UDS_CFLPRO") ' Este dato se Carga en el evento "If pVal.FormTypeEx = "SBOAddonProject1.Form11" And pVal.EventType = SAPbouiCOM.BoEventTypes.et_CHOOSE_FROM_LIST And pVal.BeforeAction = False"
-            '    Dim sCodiP As String = oUDS.ValueEx
-
-            '    oedit = oForm.Items.Item("edCodPro").Specific
-
-            '    If oedit.Value.Trim <> sCodiP And sCad.Trim().Length > 0 Then
-
-            '        Cargar_Datos_Proyecto(oForm, sCodiP, pVal.FormUID)
-            '        Cargar_Datos_Adicionales_Proyecto(oForm, sCodiP, pVal.FormUID)
-
-            '    End If
-
-            '    oForm = Application.SBO_Application.Forms.Item(pVal.FormUID)
-            '    oedit = oForm.Items.Item("157").Specific
-            '    oedit.Value = sCad
-
-            'End If
-
-
 
             '------------------------------------------------------------------------------------------------------------------------------------------------
             '  ESTE EVENTO CAMBIA EL COLOR DE LA CELDA EN LA MATRIX AL SELECCIONAR UNA OPCION DEL COMBO BOX (GESTION DE PLANOS)
@@ -1948,6 +1833,44 @@ Namespace SBOAddonProject1
 
         End Sub
 
+        Public Function ConvertirDataTableSAP(ByVal SAPDataTable As SAPbouiCOM.DataTable) As DataTable
+
+            '\ This function will take an SAP DataTable from the SAPbouiCOM library and convert it to a more
+            '\ easily used ADO.NET datatable which can be used for data binding much easier.
+
+            Dim dtTable As New DataTable
+            Dim NewCol As DataColumn
+            Dim NewRow As DataRow
+            Dim ColCount As Integer
+
+            Try
+
+                For ColCount = 0 To SAPDataTable.Columns.Count - 1
+                    NewCol = New DataColumn(SAPDataTable.Columns.Item(ColCount).Name)
+                    dtTable.Columns.Add(NewCol)
+                Next
+
+                For i = 0 To SAPDataTable.Rows.Count - 1
+
+                    NewRow = dtTable.NewRow
+                    'populate each column in the row we're creating
+                    For ColCount = 0 To SAPDataTable.Columns.Count - 1
+                        NewRow.Item(SAPDataTable.Columns.Item(ColCount).Name) = SAPDataTable.GetValue(ColCount, i)
+                    Next
+
+                    'Add the row to the datatable
+                    dtTable.Rows.Add(NewRow)
+                Next
+
+                Return dtTable
+
+            Catch ex As Exception
+                MsgBox(ex.ToString & Chr(10) & "Error converting SAP DataTable to DataTable .Net", MsgBoxStyle.Exclamation)
+                ConvertirDataTableSAP = Nothing
+                Exit Function
+            End Try
+
+        End Function
 
 
 #Region "Codigo Antiguo"
@@ -2645,7 +2568,7 @@ Namespace SBOAddonProject1
 
         '    'End Try
         'End If
-        
+
 #End Region
 
     End Module

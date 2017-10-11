@@ -42,7 +42,7 @@ Public Class NOpenFileDialog
 
         Try
             OpenFile.Multiselect = False
-            OpenFile.Filter = "All files(*.CSV)|*.CSV"
+            OpenFile.Filter = "All files (*.*)|*.*"  '"All files(*.CSV)|*.CSV"
             Dim filterindex As Integer = 0
             'Try
             '    filterindex = 0
