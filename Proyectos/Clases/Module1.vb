@@ -498,7 +498,7 @@ Namespace SBOAddonProject1
                 Dim oDataTable As SAPbouiCOM.DataTable
                 Dim oDT_SQL As SAPbouiCOM.DataTable
                 oDataTable = oCFLEvento.SelectedObjects
-                oDT_SQL = oForm.DataSources.DataTables.Item("DT_SQL")
+                oDT_SQL = oForm.DataSources.DataTables.Item("DT_SQL1")
 
                 Try
                     sCod = oDataTable.GetValue(0, 0)

@@ -211,8 +211,14 @@
     <Compile Include="3_Presentation_Layer\Pantallas Secundarias\FrmPCImonta.b1f.vb">
       <DependentUpon>FrmPCImonta.b1f</DependentUpon>
     </Compile>
+    <Compile Include="3_Presentation_Layer\System Forms\SystemForm1.b1f.vb">
+      <DependentUpon>SystemForm1.b1f</DependentUpon>
+    </Compile>
     <Compile Include="3_Presentation_Layer\System Forms\SystemForm2.b1f.vb">
       <DependentUpon>SystemForm2.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="3_Presentation_Layer\System Forms\SystemForm3.b1f.vb">
+      <DependentUpon>SystemForm3.b1f</DependentUpon>
     </Compile>
     <Compile Include="3_Presentation_Layer\System Forms\zFrmPruebaDI.b1f.vb">
       <DependentUpon>zFrmPruebaDI.b1f</DependentUpon>
@@ -302,8 +308,20 @@
     <None Include="3_Presentation_Layer\Pantallas Secundarias\FrmPCImonta.b1f">
       <FormCategory>UserForm</FormCategory>
     </None>
+    <None Include="3_Presentation_Layer\System Forms\SystemForm1.b1f">
+      <FormCategory>SystemForm</FormCategory>
+    </None>
+    <None Include="3_Presentation_Layer\System Forms\SystemForm1.b1f__orig_srf">
+      <DependentUpon>SystemForm1.b1f</DependentUpon>
+    </None>
     <None Include="3_Presentation_Layer\System Forms\SystemForm2.b1f">
       <FormCategory>SystemForm</FormCategory>
+    </None>
+    <None Include="3_Presentation_Layer\System Forms\SystemForm3.b1f">
+      <FormCategory>SystemForm</FormCategory>
+    </None>
+    <None Include="3_Presentation_Layer\System Forms\SystemForm3.b1f__orig_srf">
+      <DependentUpon>SystemForm3.b1f</DependentUpon>
     </None>
     <None Include="3_Presentation_Layer\System Forms\zFrmPruebaDI.b1f" />
     <None Include="3_Presentation_Layer\Pantallas Secundarias\FrmHistori_Estados.b1f">
@@ -394,7 +412,12 @@
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FuncionalidadesSDKB1\FuncionalidadesSDKB1.csproj">
+      <Project>{5c5a41bd-b5ef-4b81-acd7-ada1fea1148e}</Project>
+      <Name>FuncionalidadesSDKB1</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
