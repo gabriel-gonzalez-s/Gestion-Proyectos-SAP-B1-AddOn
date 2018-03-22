@@ -8,7 +8,9 @@ Public Class NProyectos
                                             U_Fec_Ini_Multa As Date, U_Poc_Multa As Double, U_Tope_Multa As Double, U_Frec_Multa As String, U_Coment_Multa As String,
                                             U_SlpCode As String, U_SlpName As String, U_Nro_Oport As String, U_Nro_OC_Cliente As String, U_DocEntry As Integer,
                                             U_UserSign As Integer, U_CreateDate As Date, U_Contrato_Cli As String, U_Con_Montaje As Integer, U_Con_Despacho As Integer,
-                                            U_Monto_OCC As Double, U_Desa_Asigna As String, U_Pro_Ing_Entreg As String) As String
+                                            U_Monto_OCC As Double, U_Desa_Asigna As String, U_Pro_Ing_Entreg As String, U_Condicion_Pago As String, U_Porc_Anticipo As Double,
+                                            U_Dias_Pago As Integer, U_Medio_Pago As String, U_Monto_OCCE As Double, U_Contrato_Constru As String, U_Prj_Code_Ini As String,
+                                            U_Tipo_Pryecto As String) As String
 
         Dim Obj As New DProyectos()
         Obj.U_PrjCode = U_PrjCode
@@ -44,7 +46,14 @@ Public Class NProyectos
         Obj.U_Monto_OCC = U_Monto_OCC
         Obj.U_Desa_Asigna = U_Desa_Asigna
         Obj.U_Pro_Ing_Entreg = U_Pro_Ing_Entreg
-
+        Obj.U_Condicion_Pago = U_Condicion_Pago
+        Obj.U_Porc_Anticipo = U_Porc_Anticipo
+        Obj.U_Dias_Pago = U_Dias_Pago
+        Obj.U_Medio_Pago = U_Medio_Pago
+        Obj.U_Monto_OCCE = U_Monto_OCCE
+        Obj.U_Contrato_Constru = U_Contrato_Constru
+        Obj.U_Prj_Code_Ini = U_Prj_Code_Ini
+        Obj.U_Tipo_Pryecto = U_Tipo_Pryecto
 
         Return Obj.InsertarProyecto(Obj)
 

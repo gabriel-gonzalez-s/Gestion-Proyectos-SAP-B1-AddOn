@@ -202,6 +202,9 @@
     <Compile Include="3_Presentation_Layer\Pantallas Principales\FrmPCRcomerci.b1f.vb">
       <DependentUpon>FrmPCRcomerci.b1f</DependentUpon>
     </Compile>
+    <Compile Include="3_Presentation_Layer\Pantallas Principales\GestionFinanzas.b1f.vb">
+      <DependentUpon>GestionFinanzas.b1f</DependentUpon>
+    </Compile>
     <Compile Include="3_Presentation_Layer\Pantallas Secundarias\FrmConsultaDat.b1f.vb">
       <DependentUpon>FrmConsultaDat.b1f</DependentUpon>
     </Compile>
@@ -297,6 +300,9 @@
       <FormCategory>UserForm</FormCategory>
     </None>
     <None Include="3_Presentation_Layer\Pantallas Principales\FrmRegistrar_Proy.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="3_Presentation_Layer\Pantallas Principales\GestionFinanzas.b1f">
       <FormCategory>UserForm</FormCategory>
     </None>
     <None Include="3_Presentation_Layer\Pantallas Secundarias\FrmConsultaDat.b1f">

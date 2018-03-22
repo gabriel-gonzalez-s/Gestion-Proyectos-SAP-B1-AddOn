@@ -445,6 +445,7 @@ Namespace SBOAddonProject1
             oCmbx01.ValidValues.Add("", "")
             oCmbx01.ValidValues.Add("Si", "S")
             oCmbx01.ValidValues.Add("No", "N")
+            oCmbx01.DisplayType = SAPbouiCOM.BoComboDisplayType.cdt_Description
 
             Me.Grid1.Columns.Item("Vend.").Editable = False
 
@@ -452,6 +453,7 @@ Namespace SBOAddonProject1
                 Me.Grid1.Columns.Item("Usuario Asociado " + Convert.ToString(i).Trim).Editable = False
             Next
 
+            Me.Grid1.Columns.Item("Usuario Asociado 5.1").Editable = False
             Me.Grid1.Columns.Item("Usuario Asociado 11").Visible = False
 
             For i = 0 To Grid1.DataTable.Rows.Count - 1
@@ -470,6 +472,8 @@ Namespace SBOAddonProject1
             Call oFunciones.Numero_Fila_Grid(Grid1)
 
             Me.Grid1.AutoResizeColumns()
+            Me.Grid1.Columns.Item("Revisión").Width = 100
+
 
         End Sub
 
@@ -524,6 +528,9 @@ Namespace SBOAddonProject1
                 Me.Grid1.Columns.Item("Usuario Asociado " + Convert.ToString(i).Trim).BackColor = RGB(224, 255, 255) 'Cian claro
             Next
 
+            Me.Grid1.Columns.Item("Usuario Asociado 5.1").BackColor = RGB(224, 255, 255) 'Cian claro
+
+
             Dim nRow As Integer = 0
             For Row = 0 To Grid1.Rows.Count - 1
                 nRow = Grid1.GetDataTableRowIndex(Row)
@@ -553,6 +560,7 @@ Namespace SBOAddonProject1
                 Dim FecVisita As String = Grid1.DataTable.GetValue("Visita Tecnica", vRow)
                 Dim FecPlano As String = Grid1.DataTable.GetValue("Plano Proyecto", vRow)
                 Dim FecCubicacion As String = Grid1.DataTable.GetValue("Cubicación", vRow)
+                Dim FecRevision As String = Grid1.DataTable.GetValue("Revisión", vRow)
                 Dim FecReceta As String = Grid1.DataTable.GetValue("Creación Codigos/Recetas", vRow)
                 Dim FecPCV As String = Grid1.DataTable.GetValue("Grabación de PCV", vRow)
                 Dim FecOCInd As String = Grid1.DataTable.GetValue("Generación OC Industrial", vRow)
@@ -561,32 +569,34 @@ Namespace SBOAddonProject1
                 Dim Entregado As String = Grid1.DataTable.GetValue("Proyecto Cerrado", vRow)
 
                 'Actualiza Datos del Proyecto en ZINFOP
-                sPSql = "UPDATE [" + sBDComercial.Trim() + "].DBO.[@ZINFOP]  Set " & _
-               " [U_Visita_Tec]     =     '" + Grid1.DataTable.GetValue("Con Visita Tec.", vRow).ToString() + "'" & _
-               ",[U_Fec_Recep_Ing]  =     IIF(LEN(LTRIM(RTRIM('" + FecRecepcion + "')))=0,null,CONVERT(DATE,'" + FecRecepcion + "',103)) " & _
-               ",[U_Usu_Recep_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 1", vRow).ToString() + "'" & _
-               ",[U_Fec_Distri_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecDistribucion + "')))=0,null,CONVERT(DATE,'" + FecDistribucion + "',103)) " & _
-               ",[U_Usu_Distri_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 2", vRow).ToString() + "'" & _
-               ",[U_Fec_Visita_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecVisita + "')))=0,null,CONVERT(DATE,'" + FecVisita + "',103)) " & _
-               ",[U_Usu_Visita_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 3", vRow).ToString() + "'" & _
-               ",[U_Fec_Plano_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecPlano + "')))=0,null,CONVERT(DATE,'" + FecPlano + "',103)) " & _
-               ",[U_Usu_Plano_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 4", vRow).ToString() + "'" & _
-               ",[U_Fec_Cubicacion_Ing] = IIF(LEN(LTRIM(RTRIM('" + FecCubicacion + "')))=0,null,CONVERT(DATE,'" + FecCubicacion + "',103)) " & _
-               ",[U_Usu_Cubicacion_Ing]	= '" + Grid1.DataTable.GetValue("Usuario Asociado 5", vRow).ToString() + "'" & _
-               ",[U_Fec_Receta_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecReceta + "')))=0,null,CONVERT(DATE,'" + FecReceta + "',103)) " & _
-               ",[U_Usu_Receta_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 6", vRow).ToString() + "'" & _
-               ",[U_Fec_PCV_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecPCV + "')))=0,null,CONVERT(DATE,'" + FecPCV + "',103)) " & _
-               ",[U_Usu_PCV_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 7", vRow).ToString() + "'" & _
-               ",[U_Fec_OC_Ind_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecOCInd + "')))=0,null,CONVERT(DATE,'" + FecOCInd + "',103)) " & _
-               ",[U_Usu_OC_Ind_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 8", vRow).ToString() + "'" & _
-               ",[U_Fec_OC_Mont_Ing] =	  IIF(LEN(LTRIM(RTRIM('" + FecOCMont + "')))=0,null,CONVERT(DATE,'" + FecOCMont + "',103)) " & _
-               ",[U_Usu_OC_Mont_Ing] =	  '" + Grid1.DataTable.GetValue("Usuario Asociado 9", vRow).ToString() + "'" & _
-               ",[U_Fec_Cierre_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecCierre + "')))=0,null,CONVERT(DATE,'" + FecCierre + "',103)) " & _
-               ",[U_Usu_Cierre_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 10", vRow).ToString() + "'" & _
-               ",[U_Comentario_Ing]	=	  '" + Grid1.DataTable.GetValue("Observaciones", vRow).ToString() + "'" & _
-               ",[U_Pro_Ing_Entreg] =     '" + Entregado + "'" & _
-               ",[U_Usu_Entrega_Pro] =    '" + Grid1.DataTable.GetValue("Usuario Asociado 11", vRow).ToString() + "'" & _
-               ",[U_Fec_Real_Ter_Des] =   IIF(LEN(LTRIM(RTRIM('" + FecCierre + "')))=0,null,CONVERT(DATE,'" + FecCierre + "',103)) " & _
+                sPSql = "UPDATE [" + sBDComercial.Trim() + "].DBO.[@ZINFOP]  Set " &
+               " [U_Visita_Tec]     =     '" + Grid1.DataTable.GetValue("Con Visita Tec.", vRow).ToString() + "'" &
+               ",[U_Fec_Recep_Ing]  =     IIF(LEN(LTRIM(RTRIM('" + FecRecepcion + "')))=0,null,CONVERT(DATE,'" + FecRecepcion + "',103)) " &
+               ",[U_Usu_Recep_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 1", vRow).ToString() + "'" &
+               ",[U_Fec_Distri_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecDistribucion + "')))=0,null,CONVERT(DATE,'" + FecDistribucion + "',103)) " &
+               ",[U_Usu_Distri_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 2", vRow).ToString() + "'" &
+               ",[U_Fec_Visita_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecVisita + "')))=0,null,CONVERT(DATE,'" + FecVisita + "',103)) " &
+               ",[U_Usu_Visita_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 3", vRow).ToString() + "'" &
+               ",[U_Fec_Plano_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecPlano + "')))=0,null,CONVERT(DATE,'" + FecPlano + "',103)) " &
+               ",[U_Usu_Plano_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 4", vRow).ToString() + "'" &
+               ",[U_Fec_Cubicacion_Ing] = IIF(LEN(LTRIM(RTRIM('" + FecCubicacion + "')))=0,null,CONVERT(DATE,'" + FecCubicacion + "',103)) " &
+               ",[U_Usu_Cubicacion_Ing]	= '" + Grid1.DataTable.GetValue("Usuario Asociado 5", vRow).ToString() + "'" &
+               ",[U_Fec_Revision_Ing] = IIF(LEN(LTRIM(RTRIM('" + FecRevision + "')))=0,null,CONVERT(DATE,'" + FecRevision + "',103)) " &
+               ",[U_Usu_Revision_Ing]	= '" + Grid1.DataTable.GetValue("Usuario Asociado 5.1", vRow).ToString() + "'" &
+               ",[U_Fec_Receta_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecReceta + "')))=0,null,CONVERT(DATE,'" + FecReceta + "',103)) " &
+               ",[U_Usu_Receta_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 6", vRow).ToString() + "'" &
+               ",[U_Fec_PCV_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecPCV + "')))=0,null,CONVERT(DATE,'" + FecPCV + "',103)) " &
+               ",[U_Usu_PCV_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 7", vRow).ToString() + "'" &
+               ",[U_Fec_OC_Ind_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecOCInd + "')))=0,null,CONVERT(DATE,'" + FecOCInd + "',103)) " &
+               ",[U_Usu_OC_Ind_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 8", vRow).ToString() + "'" &
+               ",[U_Fec_OC_Mont_Ing] =	  IIF(LEN(LTRIM(RTRIM('" + FecOCMont + "')))=0,null,CONVERT(DATE,'" + FecOCMont + "',103)) " &
+               ",[U_Usu_OC_Mont_Ing] =	  '" + Grid1.DataTable.GetValue("Usuario Asociado 9", vRow).ToString() + "'" &
+               ",[U_Fec_Cierre_Ing]	=	  IIF(LEN(LTRIM(RTRIM('" + FecCierre + "')))=0,null,CONVERT(DATE,'" + FecCierre + "',103)) " &
+               ",[U_Usu_Cierre_Ing]	=	  '" + Grid1.DataTable.GetValue("Usuario Asociado 10", vRow).ToString() + "'" &
+               ",[U_Comentario_Ing]	=	  '" + Grid1.DataTable.GetValue("Observaciones", vRow).ToString() + "'" &
+               ",[U_Pro_Ing_Entreg] =     '" + Entregado + "'" &
+               ",[U_Usu_Entrega_Pro] =    '" + Grid1.DataTable.GetValue("Usuario Asociado 11", vRow).ToString() + "'" &
+               ",[U_Fec_Real_Ter_Des] =   IIF(LEN(LTRIM(RTRIM('" + FecCierre + "')))=0,null,CONVERT(DATE,'" + FecCierre + "',103)) " &
                " Where convert(nvarchar(max),U_PrjCode) = '" + NumProyec + "'"
 
                 Try
@@ -597,69 +607,73 @@ Namespace SBOAddonProject1
 
                 'Inserta registro de Historico en @ZHFGING para el proyecto afectado
                 Dim nProx As Integer = oFunciones.Proximo_Codigo_Correlativo("@ZHFGING", "Code", DT_SQL)
-                sPSql = " INSERT INTO [dbo].[@ZHFGING] " & _
-                        " ([Code]" & _
-                        " ,[Name]" & _
-                        " ,[U_PrjCode]" & _
-                        " ,[U_Cod_Usuario]" & _
-                        " ,[U_Nom_Usuario]" & _
-                        " ,[U_Fec_Registro]" & _
-                        " ,[U_Hora_Registro]" & _
-                        " ,[U_Fec_Recep_Ing]" & _
-                        " ,[U_Usu_Recep_Ing]" & _
-                        " ,[U_Fec_Distri_Ing]" & _
-                        " ,[U_Usu_Distri_Ing]" & _
-                        " ,[U_Fec_Visita_Ing]" & _
-                        " ,[U_Usu_Visita_Ing]" & _
-                        " ,[U_Fec_Plano_Ing]" & _
-                        " ,[U_Usu_Plano_Ing]" & _
-                        " ,[U_Fec_Cubicacion_Ing]" & _
-                        " ,[U_Usu_Cubicacion_Ing]" & _
-                        " ,[U_Fec_Receta_Ing]" & _
-                        " ,[U_Usu_Receta_Ing]" & _
-                        " ,[U_Fec_PCV_Ing]" & _
-                        " ,[U_Usu_PCV_Ing]" & _
-                        " ,[U_Fec_OC_Ind_Ing]" & _
-                        " ,[U_Usu_OC_Ind_Ing]" & _
-                        " ,[U_Fec_OC_Mont_Ing]" & _
-                        " ,[U_Usu_OC_Mont_Ing]" & _
-                        " ,[U_Fec_Cierre_Ing]" & _
-                        " ,[U_Usu_Cierre_Ing]" & _
-                        " ,[U_Comentario_Ing]" & _
-                        " ,[U_Visita_Tec]" & _
-                        " ,[U_Pro_Ing_Entreg]" & _
-                        " ,[U_Usu_Entrega_Pro])" & _
-                        "      VALUES( " & _
-                        " '" + nProx.ToString + "'" & _
-                        " ,'" + nProx.ToString + "' " & _
-                        " ,'" + NumProyec + "' " & _
-                        " ,'" + oConectarAplicacion.sCodUsuActual + "' " & _
-                        " ,'" + oConectarAplicacion.sNomUsuActual + "' " & _
-                        " ,CONVERT(DATE,'" + Date.Now + "',103) " & _
-                        " ,'" + Now.ToString("HH:mm:ss").Replace(":", "") + "' " & _
-                        ",IIF(LEN(LTRIM(RTRIM('" + FecRecepcion + "')))=0,null,CONVERT(DATE,'" + FecRecepcion + "',103)) " & _
-                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 1", vRow).ToString() + "'" & _
-                        ",IIF(LEN(LTRIM(RTRIM('" + FecDistribucion + "')))=0,null,CONVERT(DATE,'" + FecDistribucion + "',103)) " & _
-                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 2", vRow).ToString() + "'" & _
-                        ",IIF(LEN(LTRIM(RTRIM('" + FecVisita + "')))=0,null,CONVERT(DATE,'" + FecVisita + "',103)) " & _
-                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 3", vRow).ToString() + "'" & _
-                        ",IIF(LEN(LTRIM(RTRIM('" + FecPlano + "')))=0,null,CONVERT(DATE,'" + FecPlano + "',103)) " & _
-                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 4", vRow).ToString() + "'" & _
-                        ",IIF(LEN(LTRIM(RTRIM('" + FecCubicacion + "')))=0,null,CONVERT(DATE,'" + FecCubicacion + "',103)) " & _
-                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 5", vRow).ToString() + "'" & _
-                        ",IIF(LEN(LTRIM(RTRIM('" + FecReceta + "')))=0,null,CONVERT(DATE,'" + FecReceta + "',103)) " & _
-                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 6", vRow).ToString() + "'" & _
-                        ",IIF(LEN(LTRIM(RTRIM('" + FecPCV + "')))=0,null,CONVERT(DATE,'" + FecPCV + "',103)) " & _
-                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 7", vRow).ToString() + "'" & _
-                        ",IIF(LEN(LTRIM(RTRIM('" + FecOCInd + "')))=0,null,CONVERT(DATE,'" + FecOCInd + "',103)) " & _
-                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 8", vRow).ToString() + "'" & _
-                        ",IIF(LEN(LTRIM(RTRIM('" + FecOCMont + "')))=0,null,CONVERT(DATE,'" + FecOCMont + "',103)) " & _
-                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 9", vRow).ToString() + "'" & _
-                        ",IIF(LEN(LTRIM(RTRIM('" + FecCierre + "')))=0,null,CONVERT(DATE,'" + FecCierre + "',103)) " & _
-                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 10", vRow).ToString() + "'" & _
-                        ",'" + Grid1.DataTable.GetValue("Observaciones", vRow).ToString() + "'" & _
-                        ",'" + Grid1.DataTable.GetValue("Con Visita Tec.", vRow).ToString() + "'" & _
-                        ",'" + Entregado + "'" & _
+                sPSql = " INSERT INTO [dbo].[@ZHFGING] " &
+                        " ([Code]" &
+                        " ,[Name]" &
+                        " ,[U_PrjCode]" &
+                        " ,[U_Cod_Usuario]" &
+                        " ,[U_Nom_Usuario]" &
+                        " ,[U_Fec_Registro]" &
+                        " ,[U_Hora_Registro]" &
+                        " ,[U_Fec_Recep_Ing]" &
+                        " ,[U_Usu_Recep_Ing]" &
+                        " ,[U_Fec_Distri_Ing]" &
+                        " ,[U_Usu_Distri_Ing]" &
+                        " ,[U_Fec_Visita_Ing]" &
+                        " ,[U_Usu_Visita_Ing]" &
+                        " ,[U_Fec_Plano_Ing]" &
+                        " ,[U_Usu_Plano_Ing]" &
+                        " ,[U_Fec_Cubicacion_Ing]" &
+                        " ,[U_Usu_Cubicacion_Ing]" &
+                        " ,[U_Fec_Revision_Ing]" &
+                        " ,[U_Usu_Revision_Ing]" &
+                        " ,[U_Fec_Receta_Ing]" &
+                        " ,[U_Usu_Receta_Ing]" &
+                        " ,[U_Fec_PCV_Ing]" &
+                        " ,[U_Usu_PCV_Ing]" &
+                        " ,[U_Fec_OC_Ind_Ing]" &
+                        " ,[U_Usu_OC_Ind_Ing]" &
+                        " ,[U_Fec_OC_Mont_Ing]" &
+                        " ,[U_Usu_OC_Mont_Ing]" &
+                        " ,[U_Fec_Cierre_Ing]" &
+                        " ,[U_Usu_Cierre_Ing]" &
+                        " ,[U_Comentario_Ing]" &
+                        " ,[U_Visita_Tec]" &
+                        " ,[U_Pro_Ing_Entreg]" &
+                        " ,[U_Usu_Entrega_Pro])" &
+                        "      VALUES( " &
+                        " '" + nProx.ToString + "'" &
+                        " ,'" + nProx.ToString + "' " &
+                        " ,'" + NumProyec + "' " &
+                        " ,'" + oConectarAplicacion.sCodUsuActual + "' " &
+                        " ,'" + oConectarAplicacion.sNomUsuActual + "' " &
+                        " ,CONVERT(DATE,'" + Date.Now + "',103) " &
+                        " ,'" + Now.ToString("HH:mm:ss").Replace(":", "") + "' " &
+                        ",IIF(LEN(LTRIM(RTRIM('" + FecRecepcion + "')))=0,null,CONVERT(DATE,'" + FecRecepcion + "',103)) " &
+                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 1", vRow).ToString() + "'" &
+                        ",IIF(LEN(LTRIM(RTRIM('" + FecDistribucion + "')))=0,null,CONVERT(DATE,'" + FecDistribucion + "',103)) " &
+                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 2", vRow).ToString() + "'" &
+                        ",IIF(LEN(LTRIM(RTRIM('" + FecVisita + "')))=0,null,CONVERT(DATE,'" + FecVisita + "',103)) " &
+                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 3", vRow).ToString() + "'" &
+                        ",IIF(LEN(LTRIM(RTRIM('" + FecPlano + "')))=0,null,CONVERT(DATE,'" + FecPlano + "',103)) " &
+                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 4", vRow).ToString() + "'" &
+                        ",IIF(LEN(LTRIM(RTRIM('" + FecCubicacion + "')))=0,null,CONVERT(DATE,'" + FecCubicacion + "',103)) " &
+                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 5", vRow).ToString() + "'" &
+                        ",IIF(LEN(LTRIM(RTRIM('" + FecRevision + "')))=0,null,CONVERT(DATE,'" + FecRevision + "',103)) " &
+                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 5.1", vRow).ToString() + "'" &
+                        ",IIF(LEN(LTRIM(RTRIM('" + FecReceta + "')))=0,null,CONVERT(DATE,'" + FecReceta + "',103)) " &
+                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 6", vRow).ToString() + "'" &
+                        ",IIF(LEN(LTRIM(RTRIM('" + FecPCV + "')))=0,null,CONVERT(DATE,'" + FecPCV + "',103)) " &
+                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 7", vRow).ToString() + "'" &
+                        ",IIF(LEN(LTRIM(RTRIM('" + FecOCInd + "')))=0,null,CONVERT(DATE,'" + FecOCInd + "',103)) " &
+                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 8", vRow).ToString() + "'" &
+                        ",IIF(LEN(LTRIM(RTRIM('" + FecOCMont + "')))=0,null,CONVERT(DATE,'" + FecOCMont + "',103)) " &
+                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 9", vRow).ToString() + "'" &
+                        ",IIF(LEN(LTRIM(RTRIM('" + FecCierre + "')))=0,null,CONVERT(DATE,'" + FecCierre + "',103)) " &
+                        ",'" + Grid1.DataTable.GetValue("Usuario Asociado 10", vRow).ToString() + "'" &
+                        ",'" + Grid1.DataTable.GetValue("Observaciones", vRow).ToString() + "'" &
+                        ",'" + Grid1.DataTable.GetValue("Con Visita Tec.", vRow).ToString() + "'" &
+                        ",'" + Entregado + "'" &
                         ",'" + Grid1.DataTable.GetValue("Usuario Asociado 11", vRow).ToString() + "')"
 
                 Try

@@ -1,4 +1,5 @@
 ﻿Imports SAPbouiCOM.Framework
+Imports AdicionalesProyectos
 
 Namespace SBOAddonProject1
     Public Class Menu
@@ -72,13 +73,17 @@ Namespace SBOAddonProject1
                     oCreationPackage.String = "Gestion de Montaje"
                     oCreationPackage.Position = 5
                     oMenus.AddEx(oCreationPackage)
+                    oCreationPackage.UniqueID = "SBOAddonProject1.GestionFinanzas"
+                    oCreationPackage.String = "Gestion de Finanzas"
+                    oCreationPackage.Position = 6
+                    oMenus.AddEx(oCreationPackage)
                     oCreationPackage.UniqueID = "SBOAddonProject1.FrmGestionTV"
                     oCreationPackage.String = "Gestion TV"
-                    oCreationPackage.Position = 6
+                    oCreationPackage.Position = 7
                     oMenus.AddEx(oCreationPackage)
                     oCreationPackage.UniqueID = "SBOAddonProject1.FrmPCRcomerci"
                     oCreationPackage.String = "Informe PCRs activas"
-                    oCreationPackage.Position = 7
+                    oCreationPackage.Position = 8
                     oMenus.AddEx(oCreationPackage)
 
 
@@ -141,6 +146,12 @@ Namespace SBOAddonProject1
                 If (pVal.BeforeAction And pVal.MenuUID = "SBOAddonProject1.Form_PlanifMontajes") Then
                     Dim activeForm As Form_PlanifMontajes
                     activeForm = New Form_PlanifMontajes
+                    activeForm.Show()
+                End If
+
+                If (pVal.BeforeAction And pVal.MenuUID = "SBOAddonProject1.GestionFinanzas") Then
+                    Dim activeForm As GestionFinanzas
+                    activeForm = New GestionFinanzas
                     activeForm.Show()
                 End If
 

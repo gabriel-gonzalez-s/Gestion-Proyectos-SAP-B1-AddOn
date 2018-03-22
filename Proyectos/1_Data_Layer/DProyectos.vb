@@ -76,6 +76,16 @@ Public Class DProyectos
     Private _U_ColorMensaje As String = ""
     Private _U_EstadoMnsMont As String = ""
     Private _U_Fec_Real_Recep_Mon As Date = New Date(1900, 1, 1)
+    Private _U_Condicion_Pago As String
+    Private _U_Porc_Anticipo As Double = 0.0
+    Private _U_Dias_Pago As Integer = 0
+    Private _U_Medio_Pago As String
+    Private _U_Monto_OCCE As Double
+    Private _U_Contrato_Constru As String
+    Private _U_Prj_Code_Ini As String
+    Private _U_Tipo_Pryecto As String
+
+
 
     Public Property U_PrjCode() As String
         Get
@@ -740,6 +750,78 @@ Public Class DProyectos
         End Get
         Set(ByVal Value As Date)
             _U_Fec_Real_Recep_Mon = Value
+        End Set
+    End Property
+
+    Public Property U_Condicion_Pago() As String
+        Get
+            Return _U_Condicion_Pago
+        End Get
+        Set(ByVal value As String)
+            _U_Condicion_Pago = value
+        End Set
+    End Property
+
+    Public Property U_Porc_Anticipo As Double
+        Get
+            Return _U_Porc_Anticipo
+        End Get
+        Set(value As Double)
+            _U_Porc_Anticipo = value
+        End Set
+    End Property
+
+    Public Property U_Dias_Pago As Integer
+        Get
+            Return _U_Dias_Pago
+        End Get
+        Set(value As Integer)
+            _U_Dias_Pago = value
+        End Set
+    End Property
+
+    Public Property U_Medio_Pago As String
+        Get
+            Return _U_Medio_Pago
+        End Get
+        Set(value As String)
+            _U_Medio_Pago = value
+        End Set
+    End Property
+
+    Public Property U_Monto_OCCE() As Double
+        Get
+            Return _U_Monto_OCCE
+        End Get
+        Set(ByVal value As Double)
+            _U_Monto_OCCE = value
+        End Set
+    End Property
+
+    Public Property U_Contrato_Constru As String
+        Get
+            Return _U_Contrato_Constru
+        End Get
+        Set(value As String)
+            _U_Contrato_Constru = value
+        End Set
+    End Property
+
+    Public Property U_Prj_Code_Ini As String
+        Get
+            Return _U_Prj_Code_Ini
+        End Get
+        Set(value As String)
+            _U_Prj_Code_Ini = value
+        End Set
+    End Property
+
+    Public Property U_Tipo_Pryecto As String
+        Get
+            Return _U_Tipo_Pryecto
+        End Get
+        Set(value As String)
+            _U_Tipo_Pryecto = value
         End Set
     End Property
 

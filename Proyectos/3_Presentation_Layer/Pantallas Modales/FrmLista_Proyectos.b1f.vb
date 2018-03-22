@@ -150,9 +150,15 @@ Namespace SBOAddonProject1
                     Select Case sOrig
                         Case "GLOBAL"
                             FrmEstado_Global.Cargar_Campos_Estado_Global(FormPID, sCodigo, DT_SQL, DT_SQL2)
+                        Case "GLOBALPR"
+                            FrmEstado_Global.Obtener_Proyecto_Asociado(FormPID, sCodigo)
                         Case "PLANOS"
                             oFormP.DataSources.UserDataSources.Item("UD_CFL").ValueEx = sCodigo
                             SBOAddonProject1.Form11.Cargar_Datos(FormPID)
+                        Case "REGISTRO"
+                            FrmRegistrar_Proy.Obtener_Proyecto_Asociado(FormPID, sCodigo)
+                        Case "FINANZAS"
+                            GestionFinanzas.Cargar_Campos_Estado_Global(FormPID, sCodigo, DT_SQL)
                     End Select
 
                     Application.SBO_Application.Forms.Item(pVal.FormUID).Close()

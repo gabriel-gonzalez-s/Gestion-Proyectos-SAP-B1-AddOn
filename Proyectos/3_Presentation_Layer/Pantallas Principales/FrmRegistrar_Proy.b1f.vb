@@ -1,6 +1,6 @@
 ﻿Option Strict Off
 Option Explicit On
-
+Imports FuncionalidadesSDKB1
 Imports SAPbouiCOM.Framework
 
 Namespace SBOAddonProject1
@@ -8,6 +8,7 @@ Namespace SBOAddonProject1
     Friend Class FrmRegistrar_Proy
         Inherits UserFormBase
 
+        Public WithEvents oFormP As SAPbouiCOM.Form
 
         Public Sub New()
         End Sub
@@ -193,6 +194,26 @@ Namespace SBOAddonProject1
             Me.PictureBox0 = CType(Me.GetItem("Item_87").Specific, SAPbouiCOM.PictureBox)
             Me.DT_0X = Me.UIAPIRawForm.DataSources.DataTables.Item("DT_0X")
             Me.DT_SQLX = Me.UIAPIRawForm.DataSources.DataTables.Item("DT_SQLX")
+            Me.ComboBox1 = CType(Me.GetItem("Item_88").Specific, SAPbouiCOM.ComboBox)
+            Me.StaticText32 = CType(Me.GetItem("Item_89").Specific, SAPbouiCOM.StaticText)
+            Me.EditText29 = CType(Me.GetItem("Item_90").Specific, SAPbouiCOM.EditText)
+            Me.EditText30 = CType(Me.GetItem("Item_91").Specific, SAPbouiCOM.EditText)
+            Me.StaticText33 = CType(Me.GetItem("Item_92").Specific, SAPbouiCOM.StaticText)
+            Me.StaticText34 = CType(Me.GetItem("Item_93").Specific, SAPbouiCOM.StaticText)
+            Me.ComboBox2 = CType(Me.GetItem("Item_94").Specific, SAPbouiCOM.ComboBox)
+            Me.StaticText35 = CType(Me.GetItem("Item_95").Specific, SAPbouiCOM.StaticText)
+            Me.Folder4 = CType(Me.GetItem("Item_97").Specific, SAPbouiCOM.Folder)
+            Me.OptionBtn5 = CType(Me.GetItem("Item_98").Specific, SAPbouiCOM.OptionBtn)
+            Me.OptionBtn6 = CType(Me.GetItem("Item_99").Specific, SAPbouiCOM.OptionBtn)
+            Me.StaticText36 = CType(Me.GetItem("Item_100").Specific, SAPbouiCOM.StaticText)
+            Me.StaticText37 = CType(Me.GetItem("Item_101").Specific, SAPbouiCOM.StaticText)
+            Me.EditText31 = CType(Me.GetItem("Item_102").Specific, SAPbouiCOM.EditText)
+            Me.OptionBtn7 = CType(Me.GetItem("Item_103").Specific, SAPbouiCOM.OptionBtn)
+            Me.OptionBtn8 = CType(Me.GetItem("Item_104").Specific, SAPbouiCOM.OptionBtn)
+            Me.StaticText38 = CType(Me.GetItem("Item_105").Specific, SAPbouiCOM.StaticText)
+            Me.StaticText39 = CType(Me.GetItem("Item_106").Specific, SAPbouiCOM.StaticText)
+            Me.EditText32 = CType(Me.GetItem("Item_107").Specific, SAPbouiCOM.EditText)
+            Me.Button7 = CType(Me.GetItem("Item_108").Specific, SAPbouiCOM.Button)
             Me.OnCustomInitialize()
 
         End Sub
@@ -203,6 +224,8 @@ Namespace SBOAddonProject1
 
 
         Private Sub OnCustomInitialize()
+
+            oFormP = Application.SBO_Application.Forms.Item(Me.UIAPIRawForm.UniqueID)
 
             Me.EditText15.String = Date.Now.ToShortDateString
             Me.EditText16.String = Date.Now.ToShortDateString
@@ -218,12 +241,14 @@ Namespace SBOAddonProject1
             Me.EditText19.Value = "0"
             Me.EditText20.Value = "0"
             Me.EditText21.Value = "0"
+            Me.EditText31.Value = "0"
 
             Call oFunciones.FiltrarChooseFromList(Me.UIAPIRawForm.UniqueID, "CFL_0")
             Call oFunciones.FiltrarChooseFromList(Me.UIAPIRawForm.UniqueID, "CFL_1")
             Call oFunciones.FiltrarChooseFromListSLP(Me.UIAPIRawForm.UniqueID, "CFL_2")
 
             Me.ComboBox0.Select("No")
+            Me.ComboBox2.Select("CH")
 
             Me.CheckBox0.Checked = True
             Me.CheckBox1.Checked = True
@@ -235,13 +260,30 @@ Namespace SBOAddonProject1
 
             Me.OptionBtn1.GroupWith("Item_21")
 
+            Me.OptionBtn6.GroupWith("Item_98")
+
+            Me.OptionBtn8.GroupWith("Item_103")
+
             Me.PictureBox0 = CType(Me.GetItem("Item_87").Specific, SAPbouiCOM.PictureBox)
             Me.PictureBox0.Picture = sPathAnexos + "images\User.png"
             Me.Button1.Item.Enabled = False
 
             Me.EditText0.Value = oFunciones.Proximo_Codigo_OPRJ(DT_SQLX)
 
+            'Cargar Combo Condiciones Pago
+            Dim Sql = "SELECT U_CondCode,U_CondDesc FROM [" + sBDComercial.Trim() + "].[dbo].[@MIN_CONDPAG] ORDER BY 1"
+            ComboBoxExtensions.LoadComboQueryDataTable(ComboBox1, DT_SQLX, Sql, 0, 1, False)
+
             Me.OptionBtn0.Selected = True
+            Me.OptionBtn5.Selected = True
+            Me.OptionBtn7.Selected = True
+
+            StaticText37.Item.Visible = False
+            StaticText39.Item.Visible = False
+            EditText31.Item.Visible = False
+            EditText32.Item.Visible = False
+            Button7.Item.Visible = False
+            EditText32.Value = ""
 
             Me.Folder0.Item.Click()
             Me.EditText2.Item.Click()
@@ -269,6 +311,8 @@ Namespace SBOAddonProject1
             Me.Folder1.Item.AffectsFormMode = False
             Me.Folder2.Item.AffectsFormMode = False
             Me.ComboBox0.Item.AffectsFormMode = False
+            Me.ComboBox1.Item.AffectsFormMode = False
+            Me.ComboBox2.Item.AffectsFormMode = False
             Me.EditText10.Item.AffectsFormMode = False
             Me.EditText11.Item.AffectsFormMode = False
             Me.EditText12.Item.AffectsFormMode = False
@@ -284,17 +328,25 @@ Namespace SBOAddonProject1
             Me.EditText22.Item.AffectsFormMode = False
             Me.EditText23.Item.AffectsFormMode = False
             Me.EditText24.Item.AffectsFormMode = False
+            Me.EditText25.Item.AffectsFormMode = False
+            Me.EditText26.Item.AffectsFormMode = False
+            Me.EditText27.Item.AffectsFormMode = False
+            Me.EditText28.Item.AffectsFormMode = False
+            Me.EditText29.Item.AffectsFormMode = False
+            Me.EditText30.Item.AffectsFormMode = False
+            Me.EditText31.Item.AffectsFormMode = False
+            Me.EditText32.Item.AffectsFormMode = False
             Me.CheckBox2.Item.AffectsFormMode = False
             Me.CheckBox3.Item.AffectsFormMode = False
             Me.OptionBtn2.Item.AffectsFormMode = False
             Me.OptionBtn3.Item.AffectsFormMode = False
             Me.OptionBtn4.Item.AffectsFormMode = False
-            Me.EditText25.Item.AffectsFormMode = False
-            Me.EditText26.Item.AffectsFormMode = False
+            Me.OptionBtn5.Item.AffectsFormMode = False
+            Me.OptionBtn6.Item.AffectsFormMode = False
+            Me.OptionBtn7.Item.AffectsFormMode = False
+            Me.OptionBtn8.Item.AffectsFormMode = False
             Me.Matrix0.Item.AffectsFormMode = False
-            Me.EditText27.Item.AffectsFormMode = False
             Me.Button4.Item.AffectsFormMode = False
-            Me.EditText28.Item.AffectsFormMode = False
             Me.Button5.Item.AffectsFormMode = False
             Me.Button6.Item.AffectsFormMode = False
             Me.Folder3.Item.AffectsFormMode = False
@@ -362,6 +414,20 @@ Namespace SBOAddonProject1
 
         End Sub
 
+        Private Sub Button7_ClickAfter(sboObject As Object, pVal As SAPbouiCOM.SBOItemEventArg) Handles Button7.ClickAfter
+
+            Dim activeForm2 As Form2
+            activeForm2 = New Form2
+
+            Dim oUDS As SAPbouiCOM.UserDataSource = activeForm2.UIAPIRawForm.DataSources.UserDataSources.Item("UD_0")
+            oUDS.ValueEx = Me.UIAPIRawForm.UniqueID
+            oUDS = activeForm2.UIAPIRawForm.DataSources.UserDataSources.Item("UD_1")
+            oUDS.ValueEx = "REGISTRO"
+
+            activeForm2.Show()
+
+        End Sub
+
 
         Private Sub PictureBox0_ClickAfter(sboObject As System.Object, pVal As SAPbouiCOM.SBOItemEventArg) Handles PictureBox0.ClickAfter
 
@@ -376,6 +442,19 @@ Namespace SBOAddonProject1
                 oUDS2.ValueEx = "PROYECTO"
 
                 Formp2.Show()
+            End If
+
+        End Sub
+
+        Private Sub EditText0_LostFocusAfter(sboObject As Object, pVal As SAPbouiCOM.SBOItemEventArg) Handles EditText0.LostFocusAfter
+
+            If (EditText0.Value.Trim.Length > 0) Then
+                If (Right(EditText0.Value.Trim, 1) = 1) Then
+                    OptionBtn7.Selected = True
+                Else
+                    OptionBtn8.Selected = True
+                    EditText32.Value = EditText0.Value.Trim.Substring(0, EditText0.Value.Trim.Length - 1) + "1"
+                End If
             End If
 
         End Sub
@@ -524,6 +603,46 @@ Namespace SBOAddonProject1
 
         End Sub
 
+        Private Sub OptionBtn7_PressedAfter(sboObject As Object, pVal As SAPbouiCOM.SBOItemEventArg) Handles OptionBtn7.PressedAfter
+
+            oForm = Application.SBO_Application.Forms.Item(pVal.FormUID)
+
+            Try
+                oForm.Freeze(True)
+                StaticText37.Item.Visible = False
+                StaticText39.Item.Visible = False
+                EditText31.Active = False
+                EditText31.Item.Visible = False
+                EditText32.Active = False
+                EditText32.Item.Visible = False
+                Button7.Item.Visible = False
+                EditText32.Value = ""
+            Catch ex As Exception
+            Finally
+                oForm.Freeze(False)
+            End Try
+
+
+        End Sub
+
+        Private Sub OptionBtn8_ClickAfter(sboObject As Object, pVal As SAPbouiCOM.SBOItemEventArg) Handles OptionBtn8.ClickAfter
+
+            oForm = Application.SBO_Application.Forms.Item(pVal.FormUID)
+
+            Try
+                oForm.Freeze(True)
+                StaticText37.Item.Visible = True
+                StaticText39.Item.Visible = True
+                EditText31.Item.Visible = True
+                EditText32.Item.Visible = True
+                Button7.Item.Visible = True
+                EditText32.Value = EditText0.Value.Trim.Substring(0, EditText0.Value.Trim.Length - 1) + "1"
+            Catch ex As Exception
+            Finally
+                oForm.Freeze(False)
+            End Try
+
+        End Sub
 
         Private Sub Agregar_Archivo_a_Matrix()
 
@@ -604,10 +723,10 @@ Namespace SBOAddonProject1
                         Dim sVendName As String = Me.EditText4.Value.Trim.Replace("'", "''")
                         Dim sCardName As String = Me.EditText1.Value.Trim.Replace("'", "''")
                         Dim sPrjName As String = Me.EditText2.Value.Trim.Replace("'", "''")
-
                         Dim sql As String
 
                         Try
+
                             NProyectos.InsertarProyectoBase(Me.EditText0.Value.Trim(),
                                 sPrjName,
                                 Me.EditText3.String.Trim(),
@@ -640,7 +759,16 @@ Namespace SBOAddonProject1
                                 If(Me.CheckBox0.Checked, "1", "0"),
                                 Me.EditText8.String.Trim(),
                                 If(Me.OptionBtn0.Selected, "C", "I"),
-                                "N")
+                                "N",
+                                 ComboBox1.Value,
+                                 EditText29.String.Trim(),
+                                 EditText30.String.Trim(),
+                                 ComboBox2.Selected.Value,
+                                Me.EditText31.String.Trim(),
+                                If(Me.OptionBtn5.Selected, "Y", "N"),
+                                EditText32.String.Trim(),
+                                If(Me.OptionBtn7.Selected, "U", "E"))
+
                             Validador = True
 
                         Catch ex As Exception
@@ -853,6 +981,15 @@ Namespace SBOAddonProject1
             Return Validador
 
         End Function
+
+        Public Shared Sub Obtener_Proyecto_Asociado(FormID As String, sProyecto As String)
+
+            Dim oFormP As SAPbouiCOM.Form = Application.SBO_Application.Forms.Item(FormID)
+            oedit = oFormP.Items.Item("Item_107").Specific
+            oedit.Value = sProyecto
+
+        End Sub
+
 
 #Region "Codigo Anterior Registrar Proyecto"
         '" INSERT INTO [" + sBDComercial.Trim() + "].[dbo].[@ZINFOP] " & _
@@ -1138,6 +1275,31 @@ Namespace SBOAddonProject1
         Private WithEvents PictureBox0 As SAPbouiCOM.PictureBox
         Private WithEvents DT_0X As SAPbouiCOM.DataTable
         Private WithEvents DT_SQLX As SAPbouiCOM.DataTable
+        Private WithEvents ComboBox1 As SAPbouiCOM.ComboBox
+        Private WithEvents StaticText32 As SAPbouiCOM.StaticText
+        Private WithEvents EditText29 As SAPbouiCOM.EditText
+        Private WithEvents EditText30 As SAPbouiCOM.EditText
+        Private WithEvents StaticText33 As SAPbouiCOM.StaticText
+        Private WithEvents StaticText34 As SAPbouiCOM.StaticText
+        Private WithEvents ComboBox2 As SAPbouiCOM.ComboBox
+        Private WithEvents StaticText35 As SAPbouiCOM.StaticText
+        Private WithEvents Folder4 As SAPbouiCOM.Folder
+        Private WithEvents OptionBtn5 As SAPbouiCOM.OptionBtn
+        Private WithEvents OptionBtn6 As SAPbouiCOM.OptionBtn
+        Private WithEvents StaticText36 As SAPbouiCOM.StaticText
+        Private WithEvents StaticText37 As SAPbouiCOM.StaticText
+        Private WithEvents EditText31 As SAPbouiCOM.EditText
+        Private WithEvents OptionBtn7 As SAPbouiCOM.OptionBtn
+        Private WithEvents OptionBtn8 As SAPbouiCOM.OptionBtn
+        Private WithEvents StaticText38 As SAPbouiCOM.StaticText
+        Private WithEvents StaticText39 As SAPbouiCOM.StaticText
+        Private WithEvents EditText32 As SAPbouiCOM.EditText
+        Private WithEvents Button7 As SAPbouiCOM.Button
+
+
+
+
+
 
         '------------------------------------------------------
 
