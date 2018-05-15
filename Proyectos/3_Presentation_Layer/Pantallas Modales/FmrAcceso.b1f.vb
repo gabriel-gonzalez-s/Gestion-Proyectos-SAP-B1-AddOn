@@ -73,28 +73,8 @@ Namespace SBOAddonProject1
 
                     Select Case sOrig
                         Case "GLOBAL"
-                            Dim Btn As SAPbouiCOM.Button = oFormP.Items.Item("Item_68").Specific
-                            Btn.Item.Enabled = True
-                            Btn = oFormP.Items.Item("Item_83").Specific
-                            Btn.Item.Enabled = True
-                            Btn = oFormP.Items.Item("Item_86").Specific
-                            Btn.Item.Enabled = True
-                            Btn = oFormP.Items.Item("Item_89").Specific
-                            Btn.Item.Enabled = True
-                            Btn = oFormP.Items.Item("Item_92").Specific
-                            Btn.Item.Enabled = True
-                            Btn = oFormP.Items.Item("Item_205").Specific
-                            If (Btn.Item.Visible = True) Then
-                                Btn.Item.Enabled = True
-                            End If
-                            Btn = oFormP.Items.Item("Item_113").Specific
-                            Btn.Item.Enabled = True
-                            Btn = oFormP.Items.Item("Item_127").Specific
-                            Btn.Item.Enabled = True
-                            Btn = oFormP.Items.Item("Item_145").Specific
-                            Btn.Item.Enabled = True
-                            Btn = oFormP.Items.Item("Item_155").Specific
-                            Btn.Item.Enabled = True
+
+                            FrmEstado_Global.Habilitar_Controles_Autorizados(oFormP)
 
                         Case "PROYECTO"
                             Dim Btn As SAPbouiCOM.Button = oFormP.Items.Item("Item_25").Specific

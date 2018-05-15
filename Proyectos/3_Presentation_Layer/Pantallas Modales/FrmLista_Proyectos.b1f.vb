@@ -159,6 +159,7 @@ Namespace SBOAddonProject1
                             FrmRegistrar_Proy.Obtener_Proyecto_Asociado(FormPID, sCodigo)
                         Case "FINANZAS"
                             GestionFinanzas.Cargar_Campos_Estado_Global(FormPID, sCodigo, DT_SQL)
+                            GestionFinanzas.Cargar_Grids_OC(FormPID, sCodigo)
                     End Select
 
                     Application.SBO_Application.Forms.Item(pVal.FormUID).Close()

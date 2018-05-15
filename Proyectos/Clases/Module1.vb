@@ -292,6 +292,10 @@ Namespace SBOAddonProject1
                                 oButton = oForm.Items.Item("Item_26").Specific
                                 oButton.Item.Click()
                                 BubbleEvent = False
+                            Case "SBOAddonProject1.GestionFinanzas" ' Pantalla Estado Finanzas
+                                oButton = oForm.Items.Item("Item_16").Specific
+                                oButton.Item.Click()
+                                BubbleEvent = False
 
                         End Select
                     End If
@@ -693,8 +697,8 @@ Namespace SBOAddonProject1
                     oedit = oForm.Items.Item("edCodPro").Specific
 
                     If oedit.Value.Trim <> sCodiP And sCad.Trim().Length > 0 And
-               sCodiP.Trim().Length > 0 And DatosProyectoCargados = 0 And
-               sCodiP.Trim() <> "PRESTAMO" Then
+                   sCodiP.Trim().Length > 0 And DatosProyectoCargados = 0 And
+                   sCodiP.Trim() <> "PRESTAMO" Then
 
                         SystemForm2.Cargar_Datos_Al_Seleccionar_Proyecto(pVal.FormUID, sCodiP)
 
@@ -1444,6 +1448,67 @@ Namespace SBOAddonProject1
 
                 End If
 
+                If pVal.FormTypeEx = "SBOAddonProject1.GestionFinanzas" And
+                  pVal.EventType = SAPbouiCOM.BoEventTypes.et_MATRIX_LINK_PRESSED And
+                  pVal.BeforeAction = True Then
+
+                    oForm = Application.SBO_Application.Forms.Item(pVal.FormUID)
+                    oGrid = oForm.Items.Item(pVal.ItemUID).Specific
+                    Dim nDocNum As String = oGrid.DataTable.GetValue(0, pVal.Row)
+                    Dim nDocNum2 As String = oGrid.DataTable.GetValue(IIf(pVal.ItemUID = "Item_128", 6, 1), pVal.Row)
+
+                    Select Case pVal.ItemUID
+                        Case "Item_24"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2050", "8", nDocNum)
+                            BubbleEvent = False
+                        Case "Item_77"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2050", "8", nDocNum2)
+                            BubbleEvent = False
+                        Case "Item_128"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2050", "8", nDocNum2)
+                            BubbleEvent = False
+                        Case "Item_25"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2051", "8", nDocNum)
+                            BubbleEvent = False
+                        Case "Item_78"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2051", "8", nDocNum2)
+                            BubbleEvent = False
+                        Case "Item_26"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2053", "8", nDocNum)
+                            BubbleEvent = False
+                        Case "Item_79"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2053", "8", nDocNum2)
+                            BubbleEvent = False
+                        Case "Item_45"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2064", "8", nDocNum)
+                            BubbleEvent = False
+                        Case "Item_95"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2064", "8", nDocNum2)
+                            BubbleEvent = False
+                        Case "Item_49"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2055", "8", nDocNum)
+                            BubbleEvent = False
+                        Case "Item_99"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2055", "8", nDocNum2)
+                            BubbleEvent = False
+                        Case "Item_31"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2817", "3", nDocNum)
+                            BubbleEvent = False
+                        Case "Item_84"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2817", "3", nDocNum2)
+                            BubbleEvent = False
+                        Case "Item_62"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2052", "8", nDocNum)
+                            BubbleEvent = False
+                        Case "Item_103"
+                            oFunciones.LinkedObjectForm(pVal.FormUID, "2052", "8", nDocNum2)
+                            BubbleEvent = False
+                        Case "Item_70"
+                            BubbleEvent = False
+                    End Select
+
+                End If
+
 
                 '-------------------------------------------------------------------------------------------------------
                 '    CAPTURA EVENTO DE CLICK EN GRID DE PANTALLA DE MENSAJES O ALERTAS
@@ -1670,6 +1735,29 @@ Namespace SBOAddonProject1
                                 End Try
                             End If
                         End If
+                    Case "SBOAddonProject1.GestionFinanzas"       'PANTALLA GESTION DE FINANZAS
+                        Dim Grid_Menu_Tabla = {"Item_70", "Item_75", "Item_24", "Item_25", "Item_26", "Item_45", "Item_46", "Item_49", "Item_31", "Item_77", "Item_78", "Item_79", "Item_95", "Item_99", "Item_84", "Item_128", "Item_123"}
+
+                        If Grid_Menu_Tabla.Contains(eventInfo.ItemUID) Then
+                            oForm.EnableMenu("772", True)
+                            oForm.EnableMenu("784", True)
+                        Else
+                            oForm.EnableMenu("784", False)
+                            oForm.EnableMenu("772", True)
+                        End If
+
+                        'Select Case eventInfo.ItemUID
+                        '    Case "Item_70"
+                        '        oForm.EnableMenu("772", True)
+                        '        oForm.EnableMenu("784", True)
+                        '    Case "Item_75"
+                        '        oForm.EnableMenu("772", True)
+                        '        oForm.EnableMenu("784", True)
+                        '    Case Else
+                        '        oForm.EnableMenu("784", False)
+                        '        oForm.EnableMenu("772", True)
+                        'End Select
+
 
                 End Select
             End If

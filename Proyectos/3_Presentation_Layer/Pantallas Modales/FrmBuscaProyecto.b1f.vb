@@ -68,12 +68,12 @@ Namespace SBOAddonProject1
 
         Private Sub Grid0_ClickAfter(sboObject As Object, pVal As SAPbouiCOM.SBOItemEventArg) Handles Grid0.ClickAfter
 
-            Application.SBO_Application.StatusBar.SetText("CLick en Grid", SAPbouiCOM.BoMessageTime.bmt_Short, SAPbouiCOM.BoStatusBarMessageType.smt_Success)
+            Application.SBO_Application.StatusBar.SetText("Click en Grid", SAPbouiCOM.BoMessageTime.bmt_Short, SAPbouiCOM.BoStatusBarMessageType.smt_Success)
 
         End Sub
 
         Private Sub Button1_ClickAfter(sboObject As Object, pVal As SAPbouiCOM.SBOItemEventArg)
-            Application.SBO_Application.StatusBar.SetText("CLick en Grid", SAPbouiCOM.BoMessageTime.bmt_Short, SAPbouiCOM.BoStatusBarMessageType.smt_Success)
+            Application.SBO_Application.StatusBar.SetText("Click en Grid", SAPbouiCOM.BoMessageTime.bmt_Short, SAPbouiCOM.BoStatusBarMessageType.smt_Success)
         End Sub
     End Class
 End Namespace

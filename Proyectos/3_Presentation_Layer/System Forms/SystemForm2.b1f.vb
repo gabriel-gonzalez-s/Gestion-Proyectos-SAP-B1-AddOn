@@ -164,27 +164,26 @@ Namespace SBOAddonProject1
         Private Sub PictureBox0_ClickAfter(sboObject As System.Object, pVal As SAPbouiCOM.SBOItemEventArg) Handles PictureBox0.ClickAfter
 
             If PictureBox0.Item.Visible = True Then
-
+                Dim oFormA As SAPbouiCOM.Form = Application.SBO_Application.Forms.Item(pVal.FormUID)
                 Try
-                    oForm = Application.SBO_Application.Forms.Item(Me.UIAPIRawForm.UniqueID)
-                    oForm.Freeze(True)
-                    oedit = oForm.Items.Item("157").Specific
+                    oFormA.Freeze(True)
+                    oedit = oFormA.Items.Item("157").Specific
                     Dim sCad As String = oedit.Value
 
                     If sCad.Trim().Length > 0 And sCad.Trim() <> "PRESTAMO" Then
 
-                        SystemForm2.Cargar_Datos_Proyecto(oForm, sCad, pVal.FormUID, "")
-                        SystemForm2.Cargar_Datos_Adicionales_Proyecto(oForm, sCad, pVal.FormUID)
-                        SystemForm2.Cargar_Matrix_Planos_Proyecto(oForm)
-                        SystemForm2.Cargar_Matrix_Documentos_Proyecto(oForm)
+                        SystemForm2.Cargar_Datos_Proyecto(oFormA, sCad, pVal.FormUID, "")
+                        SystemForm2.Cargar_Datos_Adicionales_Proyecto(oFormA, sCad, pVal.FormUID)
+                        SystemForm2.Cargar_Matrix_Planos_Proyecto(oFormA)
+                        SystemForm2.Cargar_Matrix_Documentos_Proyecto(oFormA)
 
-                        oForm = Application.SBO_Application.Forms.Item(Me.UIAPIRawForm.UniqueID)
-                        oForm.Items.Item("14").Click()
+                        oForm = Application.SBO_Application.Forms.Item(pVal.FormUID)
+                        oFormA.Items.Item("14").Click()
 
                     End If
                 Catch ex As Exception
                 Finally
-                    oForm.Freeze(False)
+                    oFormA.Freeze(False)
                 End Try
 
 
@@ -212,6 +211,7 @@ Namespace SBOAddonProject1
 
                 SystemForm2.Cargar_Datos_Proyecto(oForm, sCodPro, oForm.UniqueID, "")
                 SystemForm2.Cargar_Datos_Adicionales_Proyecto(oForm, sCodPro, oForm.UniqueID)
+                oForm = Application.SBO_Application.Forms.Item(sFormOrig)
                 SystemForm2.Cargar_Matrix_Planos_Proyecto(oForm)
                 SystemForm2.Cargar_Matrix_Documentos_Proyecto(oForm)
 
@@ -375,6 +375,10 @@ Namespace SBOAddonProject1
                         Dim FormIdProx = (Convert.ToInt32(FormUID.Replace(Left(FormUID, 2), "")) + 1).ToString()
                         Dim PrefFormID = Left(FormUID, 2)
                         oForm = Application.SBO_Application.Forms.Item(UDFFormID)
+                        If (Application.SBO_Application.Menus.Item("6913").Enabled And
+                            Application.SBO_Application.Menus.Item("6913").Checked = False) Then
+                            Application.SBO_Application.Menus.Item("6913").Activate()
+                        End If
 
                     Catch ex As Exception
                         AbiertoDesdeMenu = True
@@ -429,6 +433,7 @@ Namespace SBOAddonProject1
 
                     oForm.Items.Item("U_MIN_Vendedor").Click()
 
+                    oForm.Freeze(False)
                 Catch ex As Exception
 
                     'Application.SBO_Application.ActivateMenuItem("6913")

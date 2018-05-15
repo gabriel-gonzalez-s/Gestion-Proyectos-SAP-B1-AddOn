@@ -104,8 +104,6 @@ Namespace SBOAddonProject1
         '   Me.DT_SQLX = Me.UIAPIRawForm.DataSources.DataTables.Item("DT_SQLX")
 #End Region
 
-
-
         Public Overrides Sub OnInitializeComponent()
             Me.EditText0 = CType(Me.GetItem("Item_0").Specific, SAPbouiCOM.EditText)
             Me.StaticText0 = CType(Me.GetItem("Item_1").Specific, SAPbouiCOM.StaticText)
@@ -724,6 +722,9 @@ Namespace SBOAddonProject1
                         Dim sCardName As String = Me.EditText1.Value.Trim.Replace("'", "''")
                         Dim sPrjName As String = Me.EditText2.Value.Trim.Replace("'", "''")
                         Dim sql As String
+                        Dim ProyIni As String = If(Me.OptionBtn7.Selected, EditText0.Value, EditText32.Value)
+                        Dim MontoOCCE = If(Me.OptionBtn7.Selected, Me.EditText8.String.Trim(), Me.EditText31.String.Trim())
+
 
                         Try
 
@@ -764,9 +765,9 @@ Namespace SBOAddonProject1
                                  EditText29.String.Trim(),
                                  EditText30.String.Trim(),
                                  ComboBox2.Selected.Value,
-                                Me.EditText31.String.Trim(),
+                                MontoOCCE,
                                 If(Me.OptionBtn5.Selected, "Y", "N"),
-                                EditText32.String.Trim(),
+                                ProyIni.Trim(),
                                 If(Me.OptionBtn7.Selected, "U", "E"))
 
                             Validador = True

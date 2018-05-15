@@ -575,8 +575,14 @@ Grabar:
                 Me.Grd_PlanifMont.Columns.Item("Desc.Est.").Type = SAPbouiCOM.BoGridColumnType.gct_ComboBox
                 oCmbx05 = Me.Grd_PlanifMont.Columns.Item("Desc.Est.")
 
-                Sql_BuscaSC = "Select FldValue, Descr " & _
-                              "FROM [" + sBDMontaje.Trim() + "].dbo.[UFD1] WHERE TableID ='@MIN_ESTADO' and FieldID=7  Order By Descr "
+                Sql_BuscaSC = "SELECT 
+	                                FldValue, Descr
+                                FROM 
+	                                [" + sBDMontaje.Trim() + "].dbo.[UFD1] 
+                                WHERE 
+	                                TableID ='@MIN_ESTADO' and FieldID=7  and FldValue != 8
+                                ORDER BY 
+	                                Descr "
 
                 oFunciones.Inicializar_ComboBoxColumn(Me.UIAPIRawForm.UniqueID, Grd_PlanifMont.Item.UniqueID, oCmbx05.UniqueID)
 
