@@ -17,6 +17,22 @@ Namespace SBOAddonProject1
 
 
 #Region "Respaldo de OnInitializeComponent"
+
+        'Me.Button0 = CType(Me.GetItem("Item_1").Specific, SAPbouiCOM.Button)
+        'Me.Button1 = CType(Me.GetItem("Item_2").Specific, SAPbouiCOM.Button)
+        'Me.EditText0 = CType(Me.GetItem("Item_3").Specific, SAPbouiCOM.EditText)
+        'Me.StaticText0 = CType(Me.GetItem("Item_4").Specific, SAPbouiCOM.StaticText)
+        'Me.Button2 = CType(Me.GetItem("Item_6").Specific, SAPbouiCOM.Button)
+        'Me.Folder0 = CType(Me.GetItem("Item_8").Specific, SAPbouiCOM.Folder)
+        'Me.DT_1 = Me.UIAPIRawForm.DataSources.DataTables.Item("DT_1")
+        'Me.DT_SQL = Me.UIAPIRawForm.DataSources.DataTables.Item("DT_SQL")
+        'Me.DT_SQL2 = Me.UIAPIRawForm.DataSources.DataTables.Item("DT_SQL2")
+        'Me.Button3 = CType(Me.GetItem("Item_5").Specific, SAPbouiCOM.Button)
+        'Me.EditText1 = CType(Me.GetItem("Item_9").Specific, SAPbouiCOM.EditText)
+        'Me.StaticText1 = CType(Me.GetItem("Item_10").Specific, SAPbouiCOM.StaticText)
+        'Me.FiltrarChooseFromList(Me.UIAPIRawForm.UniqueID, "CFL_0")
+        'Me.OnCustomInitialize()
+
         'Me.Button0 = CType(Me.GetItem("Item_1").Specific, SAPbouiCOM.Button)
         '    Me.Button1 = CType(Me.GetItem("Item_2").Specific, SAPbouiCOM.Button)
         '    Me.EditText0 = CType(Me.GetItem("Item_3").Specific, SAPbouiCOM.EditText)
@@ -53,7 +69,11 @@ Namespace SBOAddonProject1
             Me.DT_1 = Me.UIAPIRawForm.DataSources.DataTables.Item("DT_1")
             Me.DT_SQL = Me.UIAPIRawForm.DataSources.DataTables.Item("DT_SQL")
             Me.DT_SQL2 = Me.UIAPIRawForm.DataSources.DataTables.Item("DT_SQL2")
-
+            Me.Button3 = CType(Me.GetItem("Item_5").Specific, SAPbouiCOM.Button)
+            Me.EditText1 = CType(Me.GetItem("Item_9").Specific, SAPbouiCOM.EditText)
+            Me.StaticText1 = CType(Me.GetItem("Item_10").Specific, SAPbouiCOM.StaticText)
+            Me.Matrix0 = CType(Me.GetItem("Item_0").Specific, SAPbouiCOM.Matrix)
+            Me.FiltrarChooseFromList(Me.UIAPIRawForm.UniqueID, "CFL_0")
             Me.OnCustomInitialize()
 
         End Sub
@@ -78,10 +98,35 @@ Namespace SBOAddonProject1
                 'Me.Matrix0.Columns.Item("#").DataBind.Bind("DT_1", "Row")
                 Me.Matrix0.Columns.Item("Codigo").DataBind.Bind("DT_1", "Codigo")
                 Me.Matrix0.Columns.Item("Desc").DataBind.Bind("DT_1", "Nombre")
+                Me.Matrix0.Columns.Item("OC_Cli").DataBind.Bind("DT_1", "OC_CLiente")
+                Me.Matrix0.Columns.Item("Fec_Vta").DataBind.Bind("DT_1", "Fecha_Venta")
+                Me.Matrix0.Columns.Item("Monto_OCC").DataBind.Bind("DT_1", "Monto_OCC")
+
+                Me.Matrix0.Columns.Item("#").Visible = False
+                Me.Matrix0.Columns.Item("OC_Cli").RightJustified = True
+                Me.Matrix0.Columns.Item("Fec_Vta").RightJustified = True
+                Me.Matrix0.Columns.Item("Monto_OCC").RightJustified = True
+
+                Dim index As Int16 = 0
+                For index = 1 To Matrix0.Columns.Count - 1
+                    Matrix0.Columns.Item(index).BackColor = RGB(255, 255, 255) 'Blanco
+                    Matrix0.Columns.Item(index).Editable = False
+                Next
+
                 Me.Matrix0.Clear()
                 Me.Matrix0.LoadFromDataSource()
-                Me.Matrix0.AutoResizeColumns()
+                'Me.Matrix0.AutoResizeColumns()
 
+                Me.Button0.Item.AffectsFormMode = False
+                Me.Button1.Item.AffectsFormMode = False
+                Me.EditText0.Item.AffectsFormMode = False
+                Me.StaticText0.Item.AffectsFormMode = False
+                Me.Button2.Item.AffectsFormMode = False
+                Me.Folder0.Item.AffectsFormMode = False
+                Me.Button3.Item.AffectsFormMode = False
+                Me.EditText1.Item.AffectsFormMode = False
+                Me.StaticText1.Item.AffectsFormMode = False
+                Me.Matrix0.Item.AffectsFormMode = False
 
             Catch ex As Exception
 
@@ -89,7 +134,7 @@ Namespace SBOAddonProject1
                 'Application.SBO_Application.Forms.ActiveForm.Freeze(False)
             End Try
 
-            Me.UIAPIRawForm.ReportType = "Modal"
+            'Me.UIAPIRawForm.ReportType = "Modal"
 
         End Sub
 
@@ -237,6 +282,9 @@ Namespace SBOAddonProject1
                         Me.DT_1.ExecuteQuery(query)
                         Me.Matrix0.Columns.Item("Codigo").DataBind.Bind("DT_1", "Codigo")
                         Me.Matrix0.Columns.Item("Desc").DataBind.Bind("DT_1", "Nombre")
+                        Me.Matrix0.Columns.Item("OC_Cli").DataBind.Bind("DT_1", "OC_CLiente")
+                        Me.Matrix0.Columns.Item("Fec_Vta").DataBind.Bind("DT_1", "Fecha_Venta")
+                        Me.Matrix0.Columns.Item("Monto_OCC").DataBind.Bind("DT_1", "Monto_OCC")
                         Me.Matrix0.Clear()
                         Me.Matrix0.LoadFromDataSource()
                         Me.Matrix0.AutoResizeColumns()
@@ -256,6 +304,63 @@ Namespace SBOAddonProject1
                         Me.DT_1.ExecuteQuery(query)
                         Me.Matrix0.Columns.Item("Codigo").DataBind.Bind("DT_1", "Codigo")
                         Me.Matrix0.Columns.Item("Desc").DataBind.Bind("DT_1", "Nombre")
+                        Me.Matrix0.Columns.Item("OC_Cli").DataBind.Bind("DT_1", "OC_CLiente")
+                        Me.Matrix0.Columns.Item("Fec_Vta").DataBind.Bind("DT_1", "Fecha_Venta")
+                        Me.Matrix0.Columns.Item("Monto_OCC").DataBind.Bind("DT_1", "Monto_OCC")
+                        Me.Matrix0.Clear()
+                        Me.Matrix0.LoadFromDataSource()
+                        Me.Matrix0.AutoResizeColumns()
+
+                        Ultima_Busqueda = "°#TODOS LOS REGISTROS#°"
+
+                    Catch ex As Exception
+
+                    Finally
+                        Application.SBO_Application.Forms.ActiveForm.Freeze(False)
+                    End Try
+
+                End If
+            Catch ex As Exception
+
+            End Try
+
+        End Sub
+
+        Private Sub Button3_ClickAfter(sboObject As Object, pVal As SAPbouiCOM.SBOItemEventArg) Handles Button3.ClickAfter
+
+            Try
+                If EditText1.Value.Trim().Length > 0 Then
+                    Dim query As String = "EXEC [" + sBDComercial.Trim() + "].[dbo].[Min_GPR_Consultar_Proyecto_CardCode] '" + EditText1.Value.Trim() + "'"
+                    Try
+                        Application.SBO_Application.Forms.ActiveForm.Freeze(True)
+                        Me.DT_1.ExecuteQuery(query)
+                        Me.Matrix0.Columns.Item("Codigo").DataBind.Bind("DT_1", "Codigo")
+                        Me.Matrix0.Columns.Item("Desc").DataBind.Bind("DT_1", "Nombre")
+                        Me.Matrix0.Columns.Item("OC_Cli").DataBind.Bind("DT_1", "OC_CLiente")
+                        Me.Matrix0.Columns.Item("Fec_Vta").DataBind.Bind("DT_1", "Fecha_Venta")
+                        Me.Matrix0.Columns.Item("Monto_OCC").DataBind.Bind("DT_1", "Monto_OCC")
+                        Me.Matrix0.Clear()
+                        Me.Matrix0.LoadFromDataSource()
+                        Me.Matrix0.AutoResizeColumns()
+
+                        Ultima_Busqueda = EditText1.Value.Trim
+
+                    Catch ex As Exception
+
+                    Finally
+                        Application.SBO_Application.Forms.ActiveForm.Freeze(False)
+                    End Try
+
+                Else
+                    Dim query As String = "EXEC [" + sBDComercial.Trim() + "].[dbo].[Min_GPR_Consultar_Proyecto_CardCode] ''"
+                    Try
+                        Application.SBO_Application.Forms.ActiveForm.Freeze(True)
+                        Me.DT_1.ExecuteQuery(query)
+                        Me.Matrix0.Columns.Item("Codigo").DataBind.Bind("DT_1", "Codigo")
+                        Me.Matrix0.Columns.Item("Desc").DataBind.Bind("DT_1", "Nombre")
+                        Me.Matrix0.Columns.Item("OC_Cli").DataBind.Bind("DT_1", "OC_CLiente")
+                        Me.Matrix0.Columns.Item("Fec_Vta").DataBind.Bind("DT_1", "Fecha_Venta")
+                        Me.Matrix0.Columns.Item("Monto_OCC").DataBind.Bind("DT_1", "Monto_OCC")
                         Me.Matrix0.Clear()
                         Me.Matrix0.LoadFromDataSource()
                         Me.Matrix0.AutoResizeColumns()
@@ -276,6 +381,26 @@ Namespace SBOAddonProject1
         End Sub
 
 
+
+        Private Sub FiltrarChooseFromList(ByVal FormUID As String, ByVal CFL_ID As String)
+            Try
+                Dim oConditions As SAPbouiCOM.Conditions
+                Dim oCondition As SAPbouiCOM.Condition
+                Dim oChooseFromList As SAPbouiCOM.ChooseFromList
+                Dim emptyCon As New SAPbouiCOM.Conditions
+                oChooseFromList = Application.SBO_Application.Forms.Item(FormUID).ChooseFromLists.Item(CFL_ID)
+                oChooseFromList.SetConditions(emptyCon)
+                oConditions = oChooseFromList.GetConditions()
+                oCondition = oConditions.Add
+                oCondition.Alias = "CardType"
+                oCondition.Operation = SAPbouiCOM.BoConditionOperation.co_EQUAL
+                oCondition.CondVal = "C"
+                oChooseFromList.SetConditions(oConditions)
+            Catch ex As Exception
+                Application.SBO_Application.StatusBar.SetText(ex.Message)
+            End Try
+        End Sub
+
         Private WithEvents Button0 As SAPbouiCOM.Button
         Private WithEvents Button1 As SAPbouiCOM.Button
         Private WithEvents EditText0 As SAPbouiCOM.EditText
@@ -287,9 +412,10 @@ Namespace SBOAddonProject1
         Private WithEvents DT_SQL2 As SAPbouiCOM.DataTable
         Private WithEvents Matrix0 As SAPbouiCOM.Matrix
         'Private WithEvents Matrix_0 As SAPbouiCOM.Matrix
+        Private WithEvents Button3 As SAPbouiCOM.Button
+        Private WithEvents EditText1 As SAPbouiCOM.EditText
+        Private WithEvents StaticText1 As SAPbouiCOM.StaticText
 
-        Private Sub Matrix0_ValidateAfter(sboObject As Object, pVal As SAPbouiCOM.SBOItemEventArg)
 
-        End Sub
     End Class
 End Namespace

@@ -1339,7 +1339,7 @@ Namespace SBOAddonProject1
                 oedit = oForm.Items.Item("Item_40").Specific
                 oedit.String = nTotal
                 oedit = oForm.Items.Item("Item_113").Specific
-                oedit.String = nTotal * 1.19
+                oedit.String = nTotal / (1.19)
                 'oForm.DataSources.UserDataSources.Item("TotPAG").ValueEx = nTotal
 
                 oGrid.AutoResizeColumns()
@@ -1397,7 +1397,7 @@ Namespace SBOAddonProject1
                 oedit = oForm.Items.Item("Item_93").Specific
                 oedit.String = nTotal
                 oedit = oForm.Items.Item("Item_121").Specific
-                oedit.String = nTotal * 1.19
+                oedit.String = nTotal / (1.19)
                 'oForm.DataSources.UserDataSources.Item("TotPAGOC").ValueEx = nTotal
 
                 oGrid.AutoResizeColumns()
@@ -1483,6 +1483,7 @@ Namespace SBOAddonProject1
                 oGrid.Columns.Item("Folio").BackColor = RGB(255, 255, 255) 'Blanco
 
                 oForm.DataSources.UserDataSources.Item("TotDEVOC").ValueEx = oUDataTable.GetValue("Total", 0)
+                TotDevOC = oUDataTable.GetValue("Total", 0)
                 oForm.DataSources.UserDataSources.Item("TotDESPROC").ValueEx = TotDespOC - TotDevOC
 
                 oGrid.AutoResizeColumns()
@@ -1555,7 +1556,7 @@ Namespace SBOAddonProject1
                 oGrid = oForm.Items.Item("Item_70").Specific
                 'oGrid.RowHeaders.Width = 0
 
-                Dim Col_Justif = {4, 5, 6, 8, 9, 10, 11, 12}
+                Dim Col_Justif = {4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
 
                 'oEditCol = oGrid.Columns.Item(0)
                 'oEditCol.LinkedObjectType = 17
@@ -1607,7 +1608,7 @@ Namespace SBOAddonProject1
                 oGrid = oForm.Items.Item("Item_75").Specific
                 'oGrid.RowHeaders.Width = 0
 
-                Dim Col_Justif = {5, 7, 8, 9, 10, 11, 13}
+                Dim Col_Justif = {5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20}
 
                 'oEditCol = oGrid.Columns.Item(0)
                 'oEditCol.LinkedObjectType = 17

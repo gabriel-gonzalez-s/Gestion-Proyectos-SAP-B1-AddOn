@@ -370,9 +370,12 @@ Namespace SBOAddonProject1
 
                 If esPantallaModal And FormUID <> IDPantallaModal And IDPantallaModal.Trim.Length > 0 And
                     (pVal.EventType = SAPbouiCOM.BoEventTypes.et_FORM_ACTIVATE Or pVal.EventType = SAPbouiCOM.BoEventTypes.et_FORM_DEACTIVATE Or pVal.EventType = SAPbouiCOM.BoEventTypes.et_CLICK) Then
-                    oForm = Application.SBO_Application.Forms.Item(IDPantallaModal)
-                    oForm.Select() ' Selecciona la pantalla modal
-                    BubbleEvent = False
+                    Try
+                        oForm = Application.SBO_Application.Forms.Item(IDPantallaModal)
+                        oForm.Select() ' Selecciona la pantalla modal
+                        BubbleEvent = False
+                    Catch ex As Exception
+                    End Try
                 End If
 
                 ' If the modal from is closed...
